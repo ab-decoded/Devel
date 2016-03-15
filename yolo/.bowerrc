@@ -1,0 +1,13 @@
+{
+  "directory": "static/bowerComponents/",
+  "analytics": false,
+  "timeout": 120000,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "package.json",
+    "src"
+  ]
+}

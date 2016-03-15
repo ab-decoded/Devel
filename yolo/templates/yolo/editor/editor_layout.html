@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>My Tumblelog</title>
+    <link rel="stylesheet" type="text/css" href="static/bowerComponents/semantic/dist/semantic.css">
+    <link rel="stylesheet" type="text/css" href="static/bowerComponents/font-awesome/css/font-awesome.css">
+    <link rel="stylesheet" type="text/css" href="static/css/navbar.css">
+    <link rel="stylesheet" type="text/css" href="static/css/style.css">
+    <link rel="stylesheet" type="text/css" href="static/css/ab-custom.css">
+    <link rel="stylesheet" type="text/css" href="static/css/components.css">
+  </head>
+
+  <body>
+    {% block topbar %}
+    <div id="navbar-editor" class="ui ab top fixed segment menu">
+      <div class="ui ab dropdown-title item" id="titleEditorNavbar">
+        DEVEL
+        <div class="ab dropdown-menu left">
+          <div class="ui grid">
+            <div class="six wide row column item">
+              <div class="hiUser" style="padding-top:20px;font-size:15px;">
+                Hi <b>{username}</b>!
+              </div>
+              <div class="settings dotted-link-white">
+                Manage Account
+              </div>
+              <div class="getHelp" style="font-size:11px;">Need help customizing your website. <a href="#" class="dotted-link-white" style="color:#fff !important;">Get Help</a></div>
+            </div>
+            <div class="five wide row column item centered">
+            <div style="width:100% !important;margin-top:30px;margin-bottom:20px;cursor:pointer"><i class="fa fa-file-o fa-3x"></i></div>
+            <div style="padding-bottom:20px;">Create new page</div>
+            </div>
+            <div class="five wide row column item centered">
+            <div style="width:100% !important;margin-top:30px;margin-bottom:20px;cursor:pointer"><i class="fa fa-code fa-3x"></i></div>
+            <div style="padding-bottom:20px;">My sites</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="item"></div>
+        <div class="right menu">        
+          <a class="item focus" id="editorPreview" style="color:#575757 !important;background:#ACF0F2 !important">Preview</a>
+          <a class="item focus" id="editorPublish" style="color:#fff !important;background:#1695A3 !important">Publish</a>
+        </div>
+    </div>
+
+    <div id="navbar-mobile" class="ui ab top fixed menu">
+      <div class="item">
+        Devel
+      </div>
+      <a class="item right focus toggle-sidebar" sidebar-toggle><i class="fa fa-bars"></i></a>
+      </div>
+      <div class="ui ab right sidebar vertical menu">
+        <a class="item" href="/">
+          Home
+        </a>
+        <a class="item" href="/profile">
+          Profile
+        </a>
+        <a class="item">
+          About us
+        </a>
+        <a class="item">
+          Contact
+        </a>
+      </div>
+
+    <div class="pusher">
+      <div class="editorContainer">
+            {% block page_header %}{% endblock %}
+            {% block content %}{% endblock %}
+            {% include 'yolo/editor/partials/custom-menu.html' %}
+            <script type="text/javascript" src="static/bowerComponents/jquery/dist/jquery.js"></script>
+            <script type="text/javascript" src="static/bowerComponents/semantic/dist/semantic.js"></script>
+            <script type="text/javascript" src="static/bowerComponents/interact/dist/interact.js"></script>
+            <script type="text/javascript" src="static/bowerComponents/classie/classie.js"></script>
+            <script type="text/javascript" src="static/js/modernizr.js"></script>
+            <script type="text/javascript" src="static/js/navbar.js"></script>
+            {% block js_footer %}{% endblock %}
+      </div>
+    </div>  
+    {% endblock %}
+
+  </body>
+</html>

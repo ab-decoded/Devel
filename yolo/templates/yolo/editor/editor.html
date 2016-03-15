@@ -1,0 +1,42 @@
+{% extends "yolo/editor/editor_layout.html" %}
+{% block content %}
+<link rel="stylesheet" type="text/css" href="static/css/dragger.css")}}>
+<link rel="stylesheet" type="text/css" href="static/css/colorpicker.css">
+<div class="ui ab grid" >
+	<div class="four wide column" id="editorSidebar">
+		
+		<div id="categorySelector">
+			<div>Select the components to add to your web page or change the setting of the selected component.</div>
+			<div class="editorButtons" style="text-align:center !important;">	
+				<div class="ui activeButton basic inverted button ab" data-value="settings" id="editorButtonsSettings">Settings</div>
+				<div class="ui basic inverted button ab" data-value="components" id="editorButtonsComponents">Components</div>
+			</div>
+		</div>
+		<div class="settingsDiv sidebarMainDiv" data-value="settings">
+			{% include "yolo/editor/settings.html" %}
+		</div>	
+		<div class="componentsDiv sidebarMainDiv" data-value="components">
+			{% include "yolo/editor/components.html" %}
+		</div>
+	</div>
+	<div class="twelve wide column" style="margin-left:320px;color:#000">
+		{%include "yolo/editor/components/main.html" %}
+		<div class="container">
+			<div class="content">
+				<div class="mockup-browser">
+					{% include "yolo/editor/mockup.html" %}
+				</div><!-- /mockup-browser -->
+			</div><!-- /content -->
+			{% include "yolo/editor/colorTool.html"%}
+
+		</div><!-- /container -->
+	</div>
+</div>
+{% endblock %}
+
+{% block js_footer %}
+	<script type="text/javascript" src="static/js/colorpicker.js"></script>
+	<script type="text/javascript" src="static/js/colorDropper.js"></script>
+	<script type="text/javascript" src="static/js/editor.js"></script>
+	<script type="text/javascript" src="static/js/addComponents.js"></script>
+{% endblock %}

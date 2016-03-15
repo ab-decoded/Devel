@@ -1,0 +1,29 @@
+{% extends "yolo/partials/layout.html" %}
+
+{% block content %}
+<div class="ui ab container" id="mainImage">
+  <div class="content">
+    <div id="getStarted" onclick="location.href='/editor' " data-html="<h3>Let's get Started</h3><p>Create HTML pages for your next project without any HTML and css using user-friendly tolls and drag and drop components making the development process very enjoyable.</p>">
+    	GET STARTED
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block js_footer %}
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('#getStarted')
+		  .popup({
+		    inline   : true,
+		    hoverable: true,
+		    position : 'top left',
+		    delay: {
+		      show: 300,
+		      hide: 500
+		    }
+		  })
+		;
+	});
+</script>
+{% endblock %}

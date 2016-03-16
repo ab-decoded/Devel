@@ -1,0 +1,125 @@
+{% extends "yolo/partials/layout.html" %}
+
+{% block content %}
+    {% if registered %}
+    <strong>Thank you for registering!</strong>
+    <a href="/">Return to the homepage.</a><br />
+    {% else %}
+    <div class="ui ab center aligned grid ">
+        <div class="fourteen wide mobile eight wide tablet eight wide computer column">
+            <div class="ui attached message">
+                <div class="header">Welcome to Devel!</div>
+                <p>Fill out the form below to sign-up for a new account</p>
+            </div>
+            <form class="ui form attached segment" id="user_form" method="post" action="/sign-up">
+                {% csrf_token %}
+                <div class="field">
+                    <label>Username</label>
+                    <div class="ui input">
+                        <input type="text" name="username" placeholder="Your username">
+                    </div>
+                </div>
+                <div class="field">
+                    <label>E-mail</label>
+                    <div class="ui input">
+                        <input type="text" name="email" placeholder="E-mail address">
+                    </div>
+                </div>
+                <div class="field">
+                    <label>Password</label>
+                    <div class="ui input">
+                        <input type="password" name="password" placeholder="Select a password">
+                    </div>
+                </div>
+                <div class="field">
+                    <label>Confirm password</label>
+                    <div class="ui input">
+                        <input type="password" name="confirm" placeholder="Confirm password">
+                    </div>
+                </div>
+                <button id="submitButton" value="Register" type="submit" class="ui teal animated button" style="margin-bottom:25px" tabindex="0">
+                    <div class="visible content">Signup</div>
+                    <div class="hidden content"> <i class="right arrow icon"></i> </div>
+                </button>
+                <div class="ui error message"></div>
+                {% if errors %}
+                <div class="ui negative message">
+                    <ul class="list">
+                        {% for field, errorz in errors.items %}
+                            {% for error in errorz %}
+                                    <li>{{error}}</li>
+                            {% endfor %}
+                        {% endfor %}
+                    </ul>
+                </div>
+                {% endif %}
+            </form>
+            <div class="ui bottom attached warning message">
+                <i class="icon help"></i>
+                Already signed up? <a href="/sign-in">Signin here</a> instead.
+            </div>
+        </div>
+        {% endif %}
+{% endblock %}
+
+{% block js_footer %}
+<script type="text/javascript">
+	$(document).ready(function(){
+        $('.ui.checkbox').checkbox();
+        $('.ui.form')
+          .form({
+            fields: {
+              username: {
+                identifier : 'username',
+                rules: [
+                  {
+                    type   : 'regExp[/^[a-zA-Z0-9_-]{6,12}$/]',
+                    prompt : 'Username should be 6-12 in length, and count contain only letters, numbers, \'_\' and \'-\' '
+                  }
+                ]
+              },
+              email:{
+                identifier:'email',
+                rules:[
+                {
+                  type:'email',
+                  prompt:'Please enter a valid email'
+                }
+                ]
+              },
+              password: {
+                identifier : 'password',
+                rules: [
+                  {
+                    type   : 'empty',
+                    prompt : 'Please enter a password'
+                  },
+                  {
+                    type   : 'minLength[6]',
+                    prompt : 'Your password must be at least 6 characters'
+                  }
+                ]
+              },
+              confirm:{
+                identifier: 'confirm',
+                rules:[
+                {
+                  type: 'match[password]',
+                  prompt:' Please confirm your password'
+                }
+                ]
+              }
+            }
+          });
+
+          // $('#user_form').submit(function(e){
+          //     e.preventDefault();
+          //     $.post('/sign-up', $(this).serialize(), function(data){
+          //       console.log(data.errors);
+          //        // $('.message').html(data.message);
+          //        // of course you can do something more fancy with your respone
+          //     },'json');
+          // });
+	});
+</script>
+{% endblock %}

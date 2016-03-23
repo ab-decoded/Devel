@@ -7,6 +7,8 @@
     <link rel="stylesheet" type="text/css" href="static/bowerComponents/font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="static/css/navbar.css">
     <link rel="stylesheet" type="text/css" href="static/css/style.css">
+    <!-- JQUERY SHOULD LOAD BEFORE ANYTHING ELSE  -->
+    <script type="text/javascript" src="static/bowerComponents/jquery/dist/jquery.js"></script>   
   </head>
 
   <body>
@@ -59,7 +61,6 @@
       <div class="siteContainer">
             {% block page_header %}{% endblock %}
             {% block content %}{% endblock %}
-            <script type="text/javascript" src="static/bowerComponents/jquery/dist/jquery.js"></script>
             <script type="text/javascript" src="static/bowerComponents/semantic/dist/semantic.js"></script>
             <script type="text/javascript" src="static/js/navbar.js"></script>
             {% block js_footer %}{% endblock %}

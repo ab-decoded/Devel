@@ -755,10 +755,6 @@ EDIT-AREA
 }
 .selected-area{
 	outline: 2px dashed #2F6573;
-
-	/*---------      Just for border setting-Fix :|     --------*/
-	margin-top:2px !important;
-	margin-bottom:2px !important;
 	left:2px;
 	right:2px;
 }

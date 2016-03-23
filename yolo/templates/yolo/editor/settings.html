@@ -37,7 +37,7 @@
 			  </div>
 			</div>
 			<div class="ui inverted transparent input">
-			  Size:<input type="number" style="width:50px;margin-left:5px;" class="borderWidthSetting" placeholder="size">
+			  Size:<input type="number" style="width:50px;margin-left:5px;" min="0" class="borderWidthSetting" placeholder="size">
 			</div>
 			<div class="color"></div>
 		</div>
@@ -54,6 +54,24 @@
 			<i class="styleButton style bold icon" data-style="bold"></i>
 			<i class="styleButton style italic icon" data-style="italic"></i>
 			<i class="styleButton style underline icon" data-style="underline"></i>
+		</div>		
+		<div class="paddingSetting settingDiv">
+			Padding <span style="font-size:12px;font-weight:600">(Top Left Bottom Right)</span>
+			<div class="ui inverted transparent input">
+			  <input type="number" style="width:65px;margin-left:5px;" class="setPadding" data-position="top" placeholder="Top">
+			  <input type="number" style="width:65px;margin-left:5px;" class="setPadding" data-position="left" placeholder="Left">
+			  <input type="number" style="width:65px;margin-left:5px;" class="setPadding" data-position="bottom" placeholder="Bottom">
+			  <input type="number" style="width:65px;margin-left:5px;" class="setPadding" data-position="right" placeholder="Right">
+			</div>
+		</div>
+		<div class="marginSetting settingDiv">
+			Margin <span style="font-size:12px;font-weight:600">(Top Left Bottom Right)</span>
+			<div class="ui inverted transparent input">
+			  <input type="number" style="width:65px;margin-left:5px;" class="setMargin" data-position="top" placeholder="Top">
+			  <input type="number" style="width:65px;margin-left:5px;" class="setMargin" data-position="left" placeholder="Left">
+			  <input type="number" style="width:65px;margin-left:5px;" class="setMargin" data-position="bottom" placeholder="Bottom">
+			  <input type="number" style="width:65px;margin-left:5px;" class="setMargin" data-position="right" placeholder="Right">
+			</div>
 		</div>
 	</div>
 

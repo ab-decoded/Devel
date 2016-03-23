@@ -1,20 +1,21 @@
 {% extends "yolo/partials/layout.html" %}
 
 {% block content %}
+{% load socialaccount %}
 <div class="ui container two column middle aligned very relaxed stackable grid" id="store-signin">
   <div class="column">
-    <button class="ui labeled facebook icon button social" id="facebook-login">
+    <a href="{% provider_login_url "facebook" %}"><button class="ui labeled facebook icon button social" id="facebook-login">
       <i class="facebook icon"></i>
       Sign in with Facebook
-    </button>
+    </button></a>
     <button class="ui labeled google plus icon button social" id="google-login">
       <i class="google plus icon"></i>
       Sign in with Google
     </button>
-    <button class="ui labeled twitter icon button social" id="twitter-login">
+     <a href="{% provider_login_url "twitter" %}"><button class="ui labeled twitter icon button social" id="twitter-login">
       <i class="twitter icon"></i>
       Sign in with Twitter
-    </button>
+    </button></a>
   </div>
   <div class="ui vertical divider">
     Or

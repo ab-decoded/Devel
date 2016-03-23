@@ -6,3 +6,24 @@ COMPONENT TEMPLATES
 	background:#fff;
 	padding:6px;
 }
+.columnSetup,.sizeSelector{
+	margin:0 !important;
+}
+.columnSetup>.column{
+	background:#000;
+	padding-left:0 !important;
+	padding-right:0 !important;
+	border:1px solid #575757;
+}
+.sizeSelector{
+	position: absolute;
+	width:calc(100% - 12px) !important;
+}
+.sizeSelector>.column{
+	padding-left:0 !important;
+	padding-right:0 !important;
+	background:#fff;
+	z-index:1000;
+	height:30px;
+	opacity:0.2;
+}

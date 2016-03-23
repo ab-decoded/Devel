@@ -1,7 +1,8 @@
 {% extends "yolo/editor/editor_layout.html" %}
 {% block content %}
-<link rel="stylesheet" type="text/css" href="static/css/dragger.css")}}>
+<link rel="stylesheet" type="text/css" href="static/css/dragger.css">
 <link rel="stylesheet" type="text/css" href="static/css/colorpicker.css">
+<link rel="stylesheet" type="text/css" href="static/bowerComponents/jquery-ui-1.11.4.custom/jquery-ui.min.css">
 <div class="ui ab grid" >
 	<div class="four wide column" id="editorSidebar">
 		
@@ -35,6 +36,7 @@
 {% endblock %}
 
 {% block js_footer %}
+	<script type="text/javascript" src="static/bowerComponents/jquery-ui-1.11.4.custom/jquery-ui.min.js"></script>
 	<script type="text/javascript" src="static/js/colorpicker.js"></script>
 	<script type="text/javascript" src="static/js/colorDropper.js"></script>
 	<script type="text/javascript" src="static/js/editor.js"></script>

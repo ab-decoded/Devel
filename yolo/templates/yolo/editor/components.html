@@ -2,8 +2,8 @@
 INSERT MODE
 	<div class="ui inverted buttons fluid insertMode">
 	  <div class="ui insertModeButton button" data-mode="into">Into</div>
-	  <div class="ui insertModeButton button active" data-mode="before">Before</div>
-	  <div class="ui insertModeButton button" data-mode="after">After</div>
+	  <div class="ui insertModeButton button" data-mode="before">Before</div>
+	  <div class="ui insertModeButton button active" data-mode="after">After</div>
 	</div>
 
 <!-- 	<div class="insertDiv">
@@ -34,8 +34,30 @@ INSERT MODE
 	    </div>
 	    <div class="content active">
 	      	<div class="ui inverted transparent input">
-			  Number of divs: <input type="number" style="width:50px;margin-left:20px;" value=1>
+			  Number of divs: <input type="number" min="1" max="6" id="divsCount" style="width:50px;margin-left:20px;" value=1>
 			</div>
+			<div class="ui ab sizeSelector grid">
+				<div class="sixteen wide column"></div>
+			</div>
+		    <div class="ui ab columnSetup grid">
+		    	<div class="one wide column"></div>
+		    	<div class="one wide column"></div>
+		    	<div class="one wide column"></div>
+		    	<div class="one wide column"></div>
+		    	<div class="one wide column"></div>
+		    	<div class="one wide column"></div>
+		    	<div class="one wide column"></div>
+		    	<div class="one wide column"></div>
+		    	<div class="one wide column"></div>
+		    	<div class="one wide column"></div>
+		    	<div class="one wide column"></div>
+		    	<div class="one wide column"></div>
+		    	<div class="one wide column"></div>
+		    	<div class="one wide column"></div>
+		    	<div class="one wide column"></div>
+		    	<div class="one wide column"></div>
+		    </div>
+		    <button class="ab ui button inverted insert-grid">INSERT</button>
 	    </div>
 	  </div>
 	</div>

@@ -2,33 +2,34 @@ function extractCss(){
 	var elem=$('.selected-area');
 	var x={};
 	x.border={};
+	x.padding={};
+	x.margin={};
 	x.fontSize=elem.css('font-size');
 	x.border.width=elem.css('border-width');
 	x.border.style=elem.css('border-style');
 	x.border.color=elem.css('border-color');
 	x.textAlign=elem.css('text-align');
 	x.background=elem.css('background');
+	//PADDING
+	x.padding.top=elem.css('padding-top');
+	x.padding.left=elem.css('padding-left');
+	x.padding.bottom=elem.css('padding-bottom');
+	x.padding.right=elem.css('padding-right');
+	//MARGIN
+	x.margin.top=elem.css('margin-top');
+	x.margin.left=elem.css('margin-left');
+	x.margin.bottom=elem.css('margin-bottom');
+	x.margin.right=elem.css('margin-right');
+	console.log(x.margin);
 	return x;
 }
 
+function normalizeVal(a)
+{
+	return a.replace(/[^-\d\.]/g, '');
+}
 var selectedAreaCss={};
 
-function setBorderSettings(){
-	$('.borderWidthSetting').val(selectedAreaCss.border.width.replace(/[^-\d\.]/g, ''));
-	
-	$('.borderStyleDropdown').dropdown('set selected',selectedAreaCss.border.style);
-	$('.borderStyleDropdown').dropdown({onChange:function(value,text){
-		$('.selected-area').css('border-style',value);
-	}});
-	// $('.borderStyleDropdown').change(function(e){
-	// 	var selectedStyle=$('.borderStyleDropdown').dropdown('get value');
-	// 	$('.selected-area').css('border-style',selectedStyle);
-	// });
-	$('.borderWidthSetting').change(function(e){ 
-		$('.selected-area').css('border-width',this.value+'px');
-		// console.log($('.selected-area').css('border-width'));
-	});
-}
 
 String.prototype.nl2br = function()
 {
@@ -70,6 +71,52 @@ $(document).ready(function(){
 			elem.animate({'font-size':'-=1'},100);
 			elem.animate({'line-height':'-=1'},100);
 		}
+	}
+	function setBorderSettings(){
+		$('.borderWidthSetting').val(normalizeVal(selectedAreaCss.border.width));
+		
+		$('.borderStyleDropdown').dropdown('set selected',selectedAreaCss.border.style);
+		$('.borderStyleDropdown').dropdown({onChange:function(value,text){
+			$('.selected-area').css('border-style',value);
+		}});
+		// $('.borderStyleDropdown').change(function(e){
+		// 	var selectedStyle=$('.borderStyleDropdown').dropdown('get value');
+		// 	$('.selected-area').css('border-style',selectedStyle);
+		// });
+		$('.borderWidthSetting').change(function(e){ 
+			$('.selected-area').css('border-width',this.value+'px');
+			// console.log($('.selected-area').css('border-width'));
+		});
+	}
+	function setPadding(){
+		$('.setPadding[data-position="top"]').val(normalizeVal(selectedAreaCss.padding.top));
+		$('.setPadding[data-position="left"]').val(normalizeVal(selectedAreaCss.padding.left));
+		$('.setPadding[data-position="bottom"]').val(normalizeVal(selectedAreaCss.padding.bottom));
+		$('.setPadding[data-position="right"]').val(normalizeVal(selectedAreaCss.padding.right));
+		$('.setPadding').change(function(e){
+			var $this=$(this);
+			var position='padding-'+$this.data('position');
+			$('selected-area').css(position,$this.val()+'px');
+		});	
+	}
+	function setMargin(){
+		$('.setMargin[data-position="top"]').val(normalizeVal(selectedAreaCss.margin.top));
+		$('.setMargin[data-position="left"]').val(normalizeVal(selectedAreaCss.margin.left));
+		$('.setMargin[data-position="bottom"]').val(normalizeVal(selectedAreaCss.margin.bottom));
+		$('.setMargin[data-position="right"]').val(normalizeVal(selectedAreaCss.margin.right));
+		if($('.selected-area').hasClass('container')){
+			$('.setMargin[data-position="left"]').prop('disabled',true);
+			$('.setMargin[data-position="right"]').prop('disabled',true);
+		}
+		else{
+			$('.setMargin[data-position="left"]').prop('disabled',false);
+			$('.setMargin[data-position="right"]').prop('disabled',false);
+		}
+		$('.setMargin').change(function(e){
+			var $this=$(this);
+			var position='margin-'+$this.data('position');
+			$('.selected-area').css(position,$this.val()+'px');
+		});	
 	}
 	function customMenu(){
 
@@ -138,6 +185,9 @@ $(document).ready(function(){
 			// console.log(selectedAreaCss);
 			
 			setBorderSettings();
+			setPadding();
+			setMargin();
+
 			$('.onlyVisibleOnSelectedDiv').css('display','block');
 			e.stopPropagation();
 			if($(this).hasClass('edit-area--text')){
@@ -171,11 +221,15 @@ $(document).ready(function(){
 
 		//BORDER
 		
+		//PADDING
+		
+		//MARGIN
 
 		//EDIT-TEXT
 		$('.onlyVisibleOnSelectedDiv').on("click",".edit-text-button",function(){
 			editSelectedTextArea();
 		});
+
 	}
 
 	// init();

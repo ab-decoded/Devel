@@ -96,7 +96,7 @@ $(document).ready(function(){
 		$('.setPadding').change(function(e){
 			var $this=$(this);
 			var position='padding-'+$this.data('position');
-			$('selected-area').css(position,$this.val()+'px');
+			$('.selected-area').css(position,$this.val()+'px');
 		});	
 	}
 	function setMargin(){

@@ -52,6 +52,24 @@ function insertGrid(divSizes){
 	}
 
 }
+function insertDiv(){
+	var divSize=$('.divSizeSelector>.column').attr('class').replace('ui-resizable','');
+	var x=$('<div></div>').addClass(divSize+' edit-area paint-area').append('<div class="paint-area paint-area--text edit-area edit-area--text" style=" ">hello-again-bc</div>');
+	switch(componentMode){
+		case 'after':
+			$(x).insertAfter($('.selected-area'));
+			break;
+		case 'before':
+			$(x).insertBefore($('.selected-area'));
+			break;
+		case 'into':
+			$(x).appendTo($('.selected-area'));
+			break;
+		default:
+			console.log('WTF! Chu hai kya be :|');
+	}
+
+}
 
 $(document).ready(function(){
 
@@ -80,13 +98,33 @@ $(document).ready(function(){
 			}
 		});
 
-		//INTIALIZE DIV RESIZE
+		//INTIALIZE DIV RESIZE - GRID
 		resizer($('.sizeSelector>.column'));
 
-		//INSERT BUTTON
+
+		//INSERT GRID BUTTON
 		$('.insert-grid').click(function(){
 			var divSizes=getDivSizes();
 			insertGrid(divSizes);
+		});
+
+
+		//DIV INSERT INIT
+		$('.divSizeSelector>.column').resizable({handles:'e'}).bind({
+			resizestart:function(event,ui){
+				$(event.target).attr('class','column');
+			},
+			resizestop:function(event,ui){
+				var widthOfOneDiv=$('.divColumnSetup>.column').outerWidth();
+				var widthOfResizable=$(event.target).width();
+				var x=Math.round(widthOfResizable/widthOfOneDiv);
+				$(event.target).addClass(angreejiCounting[x]+' wide column').css('width','');
+			}
+		});
+
+		//INSERT DIV BUTTON
+		$('.insert-div').click(function(){
+			insertDiv();
 		});
 	}
 	init();

@@ -176,7 +176,7 @@ $(document).ready(function(){
 	function init_settings(){
 		customMenu();
 
-		$('.edit-area').click(function(e){
+		$(document).on('click','.edit-area',function(e){
 			//console.log(this);
 			$('.edit-area').removeClass('selected-area');
 			$(this).addClass('selected-area');

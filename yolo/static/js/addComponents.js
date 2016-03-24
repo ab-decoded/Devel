@@ -1,4 +1,4 @@
-var componentMode="before";
+var componentMode;
 function insertTemplate(templateId){
 	templateId="'#"+templateId+"'";
 	$(target).html($(templateId).html);
@@ -31,11 +31,34 @@ function getDivSizes(){
 	return divSizes;
 }
 
+function insertGrid(divSizes){
+	var x=	$('<div class="ui container ab grid edit-area edit-area--div paint-area grid" style="margin:0"></div>');
+	divSizes.forEach(function(yo){
+		yo+=' edit-area paint-area';
+		$('<div></div>').addClass(yo).append('<div class="paint-area paint-area--text edit-area edit-area--text" style=" ">hello-again-bc</div>').appendTo(x);
+	});
+	switch(componentMode){
+		case 'after':
+			$(x).insertAfter($('.selected-area'));
+			break;
+		case 'before':
+			$(x).insertBefore($('.selected-area'));
+			break;
+		case 'into':
+			$(x).appendTo($('.selected-area'));
+			break;
+		default:
+			console.log('WTF! Chu hai kya be :|');
+	}
+
+}
+
 $(document).ready(function(){
 
 
 	function init(){
 		//SET INSERT MODE
+		componentMode=$('.insertModeButton.active').data('mode');
 		$('.insertModeButton').click(function(){
 			$(this).addClass('active').siblings('.button').removeClass('active');
 			componentMode=$(this).attr('data-mode');
@@ -63,7 +86,7 @@ $(document).ready(function(){
 		//INSERT BUTTON
 		$('.insert-grid').click(function(){
 			var divSizes=getDivSizes();
-
+			insertGrid(divSizes);
 		});
 	}
 	init();

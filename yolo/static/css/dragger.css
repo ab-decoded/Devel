@@ -481,13 +481,13 @@ button:focus {
 }
 
 .color-1 { background: #333; color: #333;}
-.color-2 { background: #f0f0f0; color: #f0f0f0; }
-.color-3 { background: #c0c3d5; color: #c0c3d5; }
-.color-4 { background: #5FA1E0; color: #5FA1E0; }
-.color-5 { background: #c1d5c0; color: #c1d5c0; }
-.color-6 { background: #47AE73; color: #47AE73; }
-.color-7 { background: #eae7c4; color: #eae7c4; }
-.color-8 { background: #FB6964; color: #FB6964; }
+.color-2 { background: #f0f0f0; color: #f0f0f0;}
+.color-3 { background: #c0c3d5; color: #c0c3d5;}
+.color-4 { background: #5FA1E0; color: #5FA1E0;}
+.color-5 { background: #c1d5c0; color: #c1d5c0;}
+.color-6 { background: #47AE73; color: #47AE73;}
+.color-7 { background: #eae7c4; color: #eae7c4;}
+.color-8 { background: #FB6964; color: #FB6964;}
 .color-x { background: #B9B9B9; color: #B9B9B9; border:3px solid #3B3B3B;border-radius: 15px !important;}
 
 .drag-element {

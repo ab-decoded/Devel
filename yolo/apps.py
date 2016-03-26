@@ -1,5 +1,7 @@
 from django.apps import AppConfig
 
-
 class WebappConfig(AppConfig):
-    name = 'webapp'
+    name = 'yolo'
+    verbose_name='startupConfig'
+    def ready(self):
+    	pass

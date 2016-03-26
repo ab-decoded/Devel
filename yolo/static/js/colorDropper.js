@@ -115,7 +115,7 @@ $(document).ready(function(){
 			// only accept elements matching this CSS selector
 			accept: '.drag-element',
 			// Require a 75% element overlap for a drop to be possible
-			overlap: 0.75,
+			overlap: 0.60,
 			ondragenter: function (event) {
 				classie.add(event.target, 'paint-area--highlight');
 			},

@@ -5,12 +5,16 @@ from django.template import RequestContext
 from .forms import UserForm
 from django.contrib.auth import authenticate, login,logout
 from django.contrib.auth.decorators import login_required
+import os
 
 def index(request):
 	return render(request,'yolo/index.html')
 
 def editor(request):
-	return render(request,'yolo/editor/editor.html')
+	# print os.chdir()
+	mockup = open('/home/ab/Desktop/flaskapp/devel_main/yolo/templates/yolo/editor/mockup.html')
+	# print mockup.read()
+	return render(request,'yolo/editor/editor.html',{'mockup':mockup.read()})
 
 def signup(request):
 	# context=RequestContext(request)

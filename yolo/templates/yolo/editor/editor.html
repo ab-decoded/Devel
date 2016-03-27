@@ -25,7 +25,7 @@
 		<div class="container">
 			<div class="content">
 				<div class="mockup-browser">
-					{% include "yolo/editor/mockup.html" %}
+					{{mockup | safe}}
 				</div><!-- /mockup-browser -->
 			</div><!-- /content -->
 			{% include "yolo/editor/colorTool.html"%}

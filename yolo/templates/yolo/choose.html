@@ -70,7 +70,7 @@
                 </div>
                 <div class="field">
                   <label>DESCRIPTION</label>
-                     <textarea name="description" type="text" id="testDriveDatePicker2" placeholder="This appears in the URL"></textarea>
+                     <textarea name="description" type="text" id="testDriveDatePicker2" placeholder="Template description"></textarea>
                 </div>
                   <div class="ui submit button" id="createTemplate">READY SET GO!</div>
                   <div class="ui error message"></div>
@@ -119,6 +119,7 @@
           $('#createTemplate').addClass('loading');
           $('#createTemplate').attr('disabled',true);
           fields.type="mockup"
+          console.log(fields);
           $.post('/choose', fields).done(function(data){
             console.log(data);
             $('#createTemplate').removeClass('loading');

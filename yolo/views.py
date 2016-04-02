@@ -16,10 +16,12 @@ def index(request):
 
 def choose(request):
 	if request.method=='POST':
-		data=request.POST
-		print data
-		if data.type=="mockup":
-			if data.id is not None and data.slug is not None:
+		data=request.POST.dict()
+		print data['type']
+		print data['mockupId']
+		print data['slug']
+		if data['type']=='mockup':
+			if data['mockupId'] is not None and data['slug'] is not None:
 				print 'working'
 
 		# return HttpResponse('yolo')

@@ -22,7 +22,6 @@ from django.conf.urls.static import static
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^', include('yolo.urls')),
-    url(r'^', include('testing.urls')),
     url(r'^accounts/', include('allauth.urls')),
     # url(r'^logout/$',include('logout_page'))
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

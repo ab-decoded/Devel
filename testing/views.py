@@ -18,6 +18,6 @@ def abbe(request):
 	return render(request,'testing/abbe.html')
 
 def bewde(request):
-	t=Templates.objects.get(slug="ahem-ahem");
+	t=Templates.objects.get(slug="aheeeeeeem-aheeeeeeem");
 	return render(request,'testing/bewde.html',{'template':t})
 

@@ -1,3 +1,5 @@
+@import url(http://fonts.googleapis.com/css?family=Raleway:200,400,500,700);
+
 body{
 	font-family:lato ;
 	cursor:default;
@@ -32,6 +34,7 @@ HOME PAGE
 #getStarted:hover{
 	cursor:pointer;
 }
+
 /**********************************************
 HOME PAGE-FIXES
 **********************************************/
@@ -50,6 +53,33 @@ HOME PAGE-FIXES
 	background:#000 !important;
 }
 */
+
+/************************************************
+CHOOSE PAGE
+************************************************/
+#mockupsDisplay{
+	text-align:left;
+	/*margin-top:30px;*/
+	padding:30px;
+	color:#fff;
+	background: #fd746c; /* fallback for old browsers */
+	background: -webkit-linear-gradient(to left, #fd746c , #ff9068); /* Chrome 10-25, Safari 5.1-6 */
+	background: linear-gradient(to left, #fd746c , #ff9068); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */     
+}
+#yourTemplates{
+	font-family:'raleway';
+	font-weight: 200;
+	padding-top:30px;
+	color:#A1A1A1;
+}
+.closeModal{
+	float:right;
+	font-weight:300;
+	color:#575757;
+}
+
+
+
 /************************************************
 EDITOR PAGE
 ************************************************/
@@ -90,6 +120,12 @@ EDITOR PAGE
 }
 .hideIt{
 	display:none !important;
+}
+.transparentIt{
+	opacity:0 !important;
+}
+.styleTr{
+	background:#eee;
 }
 .componentsDiv{
 	display:block;

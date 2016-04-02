@@ -1,0 +1,153 @@
+{% extends "yolo/partials/layout.html" %}
+
+{% block content %}
+<div class="ui ab center aligned container">
+  <div class="content">
+  		<div id="mockupsDisplay">
+  			<b>CREATE A DESIGN</b>
+        <div style="color:#eee">
+          Select a mockup to start the adventure.
+        </div>
+<!--         <div class="ui six column grid" style="padding-top: 30px;">
+          
+          {% for mockup in mockups %}
+            <div class="column">
+              <img class="ui small image" src="{{mockup.img.url}}">
+              {{ mockup.name }}
+              
+            </div>
+          {% endfor %}
+        </div> -->
+
+        <div class="ui special cards" style="padding-top:20px;">
+          {% for mockup in mockups %}
+          <div class="card">
+            <div class="blurring dimmable image">
+              <div class="ui inverted dimmer">
+                <div class="content">
+                  <div class="center">
+                    <div class="ui inverted red button chooseMockup" data-mockupid="{{mockup.id}}">+</div>
+                  </div>
+                </div>
+              </div>
+              <img src="{{mockup.img.url}}">
+            </div>
+            <div class="content">
+              <div class="header">{{mockup.name}}</div>
+              <div class="description">
+                {{mockup.description}}
+              </div>
+            </div>
+            <div class="extra content">
+              <span class="right floated">
+                - {{mockup.author}}
+              </span>
+              
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+
+        <div class="ab ui small modal chooseMockupModal">
+            <div class="header">
+              Getting started!
+              <a class="fa fa-close closeModal"></a>
+            </div>
+          <div class="content">
+          
+              <form class="ui form" id="testDriveModalForm">
+                {% csrf_token %}
+                <input type="hidden" id="mockupId" name="mockupId" value="">
+                <div class="field">
+                  <label>NAME YOUR TEMPLATE</label>
+                  <div class="ui input">
+                    <input name="name" type="text" placeholder="A beautiful name for your beautiful template!">
+                  </div>
+                </div>
+                <div class="field">
+                  <label>SLUG</label>
+                    <input name="slug" type="text" placeholder="This appears in the URL"/>
+                </div>
+                <div class="field">
+                  <label>DESCRIPTION</label>
+                     <textarea name="description" type="text" id="testDriveDatePicker2" placeholder="This appears in the URL"></textarea>
+                </div>
+                  <div class="ui submit button" id="createTemplate">READY SET GO!</div>
+                  <div class="ui error message"></div>
+              </form>
+          </div>
+        </div>
+  		</div>
+  		<div id="yourTemplates">
+  			<div style="font-size:30px;">Your first design gonna be amazing!</div>
+  			<div style="padding:20px;">Oopie, so empty here! Create something to showcase here!</div>
+  			<div style="font-size:25px;font-weight:600;color:#DADADA;-webkit-transform: rotate(90deg);transform: rotate(90deg);">:)</div>
+  		</div>
+  </div>
+</div>
+{% endblock %}
+
+{% block js_footer %}
+<script type="text/javascript">
+	$(document).ready(function(){
+
+    $('.ui.form')
+      .form({
+        fields: {
+          name: {
+            identifier : 'name',
+            rules: [
+              {
+                type   : 'empty',
+                prompt : 'Please enter a password'
+              }
+            ]
+          },
+          slug: {
+            identifier : 'slug',
+            rules: [
+              {
+                type   : 'regExp[/^[a-z0-9-]+$/]',
+                prompt : 'Enter a valid Slug'
+              }
+            ]
+          }
+        },
+        onSuccess:function(event,fields){
+          event.preventDefault();
+          console.log('hey');
+          $('#createTemplate').addClass('loading');
+          $('#createTemplate').attr('disabled',true);
+          fields.type="mockup"
+          $.post('/choose', fields).done(function(data){
+            console.log(data);
+            $('#createTemplate').removeClass('loading');
+            $('#createTemplate').attr('disabled',false);
+          });
+          
+            // console.log(data.errors);
+             // $('.message').html(data.message);
+             // of course you can do something more fancy with your respone
+          return false;
+        }
+      });
+      
+    
+    $('.special.cards .image').dimmer({
+      on: 'hover'
+    });
+
+    $('.chooseMockup').on('click',function(e){
+      $('#mockupId').val($(e.target).data('mockupid'));
+      // console.log($(e.target).data('mockupid'));
+      $('.ui.modal.chooseMockupModal').modal('show');
+    });
+
+    $('.closeModal').on('click',function(){
+      $('.ui.modal.chooseMockupModal').modal('hide');
+    });
+
+
+	});
+</script>
+{% endblock %}

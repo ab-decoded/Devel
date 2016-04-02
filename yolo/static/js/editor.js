@@ -125,13 +125,21 @@ $(document).ready(function(){
 		    // Avoid the real one
 		    event.preventDefault();		    
 		    // Show contextmenu
-		    $(".custom-menu").finish().toggle(100).
-		    
+		    if($(this).hasClass('edit-area--table')){
+		    	console.log($(this));
+		    	$('#tableMenu').finish().toggle(100).css({
+		        	top: event.pageY + "px",
+		        	left: event.pageX + "px"
+		    	});
+		    }
+		    else{
+		    	$("#generalMenu").finish().toggle(100).css({
+		        	top: event.pageY + "px",
+		        	left: event.pageX + "px"
+		    	});
+		    }
 		    // In the right position (the mouse)
-		    css({
-		        top: event.pageY + "px",
-		        left: event.pageX + "px"
-		    });
+
 		});
 
 
@@ -146,14 +154,14 @@ $(document).ready(function(){
 
 
 		// If the menu element is clicked
-		$(".custom-menu li").click(function(){
+		$("#generalMenu li").click(function(){
 		    
 		    // This is the triggered action name
 		    switch($(this).attr("data-action")) {
 		        
 		        // A case for each action. Your actions here
 		        case "delete": $('.selected-area').remove(); break;
-		        // case "insertInto":$('.selected-area')
+		        // case "insertInto":$('.selected-area'
 		    }
 		  
 		    // Hide it AFTER the action was triggered
@@ -180,7 +188,6 @@ $(document).ready(function(){
 			//console.log(this);
 			$('.edit-area').removeClass('selected-area');
 			$(this).addClass('selected-area');
-			
 			selectedAreaCss=extractCss();
 			// console.log(selectedAreaCss);
 			
@@ -196,6 +203,15 @@ $(document).ready(function(){
 			}
 			else{
 				$('.edit-text-button').remove();
+
+			}
+			if($(this).hasClass('wide column')){
+				// console.log('show karo');
+				$('.divSelectorContainer').removeClass('transparentIt');
+			}
+			else{
+				// console.log('hide karo');
+				$('.divSelectorContainer').addClass('transparentIt');
 			}
 		});
 
@@ -229,6 +245,7 @@ $(document).ready(function(){
 		$('.onlyVisibleOnSelectedDiv').on("click",".edit-text-button",function(){
 			editSelectedTextArea();
 		});
+
 
 	}
 

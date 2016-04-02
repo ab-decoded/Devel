@@ -1,4 +1,4 @@
-var componentMode;
+var componentMode,tableColumnCount=1;
 function insertTemplate(templateId){
 	templateId="'#"+templateId+"'";
 	$(target).html($(templateId).html);
@@ -31,46 +31,66 @@ function getDivSizes(){
 	return divSizes;
 }
 
+function inserter(x){
+	switch(componentMode){
+		case 'after':
+			$(x).insertAfter($('.selected-area'));
+			break;
+		case 'before':
+			$(x).insertBefore($('.selected-area'));
+			break;
+		case 'into':
+			$(x).appendTo($('.selected-area'));
+			break;
+		default:
+			console.log('WTF! Chu hai kya be :|');
+	}
+}
+
 function insertGrid(divSizes){
 	var x=	$('<div class="ui container ab grid edit-area edit-area--div paint-area grid" style="margin:0"></div>');
 	divSizes.forEach(function(yo){
 		yo+=' edit-area paint-area';
 		$('<div></div>').addClass(yo).append('<div class="paint-area paint-area--text edit-area edit-area--text" style=" ">hello-again-bc</div>').appendTo(x);
 	});
-	switch(componentMode){
-		case 'after':
-			$(x).insertAfter($('.selected-area'));
-			break;
-		case 'before':
-			$(x).insertBefore($('.selected-area'));
-			break;
-		case 'into':
-			$(x).appendTo($('.selected-area'));
-			break;
-		default:
-			console.log('WTF! Chu hai kya be :|');
-	}
 
+	inserter(x);
 }
 function insertDiv(){
 	var divSize=$('.divSizeSelector>.column').attr('class').replace('ui-resizable','');
 	var x=$('<div></div>').addClass(divSize+' edit-area paint-area').append('<div class="paint-area paint-area--text edit-area edit-area--text" style=" ">hello-again-bc</div>');
-	switch(componentMode){
-		case 'after':
-			$(x).insertAfter($('.selected-area'));
-			break;
-		case 'before':
-			$(x).insertBefore($('.selected-area'));
-			break;
-		case 'into':
-			$(x).appendTo($('.selected-area'));
-			break;
-		default:
-			console.log('WTF! Chu hai kya be :|');
-	}
+	inserter(x);
 
 }
 
+function insertTable(){
+	var x=$('<table class="ui compact celled single line table edit-area edit-area--table"></table>');
+	var tableHead=$('<thead><tr></tr></thead>');
+	var tableBody=$('<tbody><tr></tr></tbody>');
+	// var tableRow=$('<thead><tr></tr><thead>');
+	for(i=1;i<=tableColumnCount;i++)
+	{
+		$('<th></th>').html('header'+i).appendTo(tableHead.children('tr'));
+		$('<td></td>').html('content'+i).appendTo(tableBody.children('tr'));
+	}
+	tableHead.appendTo(x);
+	tableBody.appendTo(x);
+	// console.log(x.html());
+
+	inserter(x);
+	// y.appendTo(x);
+	// console.log(x.html());
+}
+function insertRow(){
+	var tableRow=$('<tr></tr>');
+	var tableColumns=$('.selected-area>thead th').length;
+	console.log(tableColumns);
+	for(i=1;i<=tableColumns;i++)
+	{
+		$('<td></td>').html('content'+i).appendTo(tableRow);
+	}
+	tableRow.appendTo($('.selected-area').children('tbody'));
+}
 $(document).ready(function(){
 
 
@@ -126,6 +146,51 @@ $(document).ready(function(){
 		$('.insert-div').click(function(){
 			insertDiv();
 		});
+
+		//TABLE-COLUMNS COUNT
+		$('#tableColumnsCount').on('change',function(){
+			tableColumnCount=$(this).val();
+			if(tableColumnCount>6) 
+				tableColumnCount=6;
+			// console.log(tableColumnCount);
+		});
+		//INSERT TABLE
+		$('.insert-table').click(function(){
+			insertTable();
+		});
+		//TABLE EDIT
+		$('body').on('dblclick','.edit-area--table td,.edit-area--table th',function(e){
+			console.log('working! Ab kal karenge...');
+			var Text=$(this).html().trim().replace(/(<br>)|(<br \/>)|(<p>)|(<\/p>)/g, "\n");
+			var editableText=$('<input class=""></input>');
+			editableText.val(Text);
+			$(this).html(editableText);
+			editableText.focus();
+			editableText.blur(function(){
+				var inputVal=$(this).val();
+				console.log(inputVal);
+				$(this).parent().html(inputVal);
+			});
+		});
+
+		//TABLE-MENU
+		$("#tableMenu li").click(function(){
+		    
+		    // This is the triggered action name
+		    switch($(this).attr("data-action")) {
+		        case "delete": $('.selected-area').remove(); break;
+		        case "insertRow": insertRow(); break;
+		        case "deleteRow": console.log('deleting');$('.selected-area .currentRow').remove();break;
+		    }
+		  	
+		    // Hide it AFTER the action was triggered
+		    $(".custom-menu").hide(100);
+		  });
+		//TABLE-DELETE-ROW-INIT
+		$('body').on('click','.edit-area--table tr',function(){
+			$(this).addClass('currentRow styleTr').siblings('tr').removeClass('styleTr currentRow');
+		});
+		
 	}
 	init();
 	$('.ui.accordion').accordion();

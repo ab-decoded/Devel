@@ -1,0 +1,20 @@
+{% extends "yolo/partials/layout.html" %}
+
+{% block content %}
+<style type="text/css">
+	.ui.grid.container{
+		width:100% !important;
+	}
+</style>
+<div class="ui ab container">
+	{{template.cleanedHtml|safe}}
+</div>
+{% endblock %}
+
+{% block js_footer %}
+<script type="text/javascript">
+	$(document).ready(function(){
+		
+	});
+</script>
+{% endblock %}

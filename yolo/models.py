@@ -47,13 +47,19 @@ class Mockup(models.Model):
         return self.pub_date>=timezone.now()-datetime.timedelta(days=1)
 
 
-# class Templates(models.Model):
-#     userId = models.ForeignKey(User)
-#     htmlCode = models.TextField()
-#     pub_date = models.DateTimeField('date published')
-#     description=models.CharField(max_length=100)
-#     name=models.CharField(max_length=50)
-#     slug=models.CharField(max_length=100,unique=True,primary_key=True)
-#     temporary=models.BooleanField(default=False)
-#     def __unicode__(self):
-#         return self.name
+class Template(models.Model):
+    userId = models.ForeignKey(User)
+    mockup=models.ForeignKey(Mockup,null=True)
+    htmlCode = models.TextField()
+    cleanedHtml = models.TextField()
+    pub_date = models.DateTimeField('date published')
+    description=models.CharField(max_length=100)
+    name=models.CharField(max_length=50)
+    slug=models.CharField(max_length=100,unique=True,primary_key=True)
+    temporary=models.BooleanField(default=False)
+    def __unicode__(self):
+        return self.name
+
+class Template_images(models.Model):
+    image=models.ImageField(upload_to='templateImages')
+    template=models.ForeignKey(Mockup,null=True)

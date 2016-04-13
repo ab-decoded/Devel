@@ -3,14 +3,14 @@
   <head>
     <meta charset="utf-8">
     <title>My Tumblelog</title>
-    <link rel="stylesheet" type="text/css" href="static/bowerComponents/semantic/dist/semantic.min.css">
-    <link rel="stylesheet" type="text/css" href="static/bowerComponents/font-awesome/css/font-awesome.min.css">
-    <link rel="stylesheet" type="text/css" href="static/css/navbar.css">
-    <link rel="stylesheet" type="text/css" href="static/css/style.css">
-    <link rel="stylesheet" type="text/css" href="static/css/ab-custom.css">
-    <link rel="stylesheet" type="text/css" href="static/css/amaran.min.css">
+    <link rel="stylesheet" type="text/css" href="/static/bowerComponents/semantic/dist/semantic.min.css">
+    <link rel="stylesheet" type="text/css" href="/static/bowerComponents/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/navbar.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/style.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/ab-custom.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/amaran.min.css">
     <!-- JQUERY SHOULD LOAD BEFORE ANYTHING ELSE  -->
-    <script type="text/javascript" src="static/bowerComponents/jquery/dist/jquery.js"></script>   
+    <script type="text/javascript" src="/static/bowerComponents/jquery/dist/jquery.js"></script>   
   </head>
 
   <body>
@@ -63,9 +63,10 @@
       <div class="siteContainer">
             {% block page_header %}{% endblock %}
             {% block content %}{% endblock %}
-            <script type="text/javascript" src="static/bowerComponents/semantic/dist/semantic.js"></script>
-            <script type="text/javascript" src="static/js/navbar.js"></script>
-            <script type="text/javascript" src="static/js/jquery.amaran.min.js"></script>
+            <script type="text/javascript" src="/static/bowerComponents/semantic/dist/semantic.js"></script>
+            <script type="text/javascript" src="/static/js/navbar.js"></script>
+            <script type="text/javascript" src="/static/js/jquery.amaran.min.js"></script>
+            <script type="text/javascript" src="/static/js/shared.js"></script>
             <script type="text/javascript">
               {% for message in messages %}
                 $.amaran({'message':'{{message}}'});

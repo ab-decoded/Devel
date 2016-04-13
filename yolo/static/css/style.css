@@ -8,13 +8,13 @@ body{
 /**********************************************
 HOME PAGE
 **********************************************/
-#mainImage{
-	background: url(../images/bg1.jpg) no-repeat center center fixed; 
+#mainImage{ 
+	  background: url(../images/bg1.jpg) no-repeat center center fixed;
 	  -webkit-background-size: cover;
 	  -moz-background-size: cover;
 	  -o-background-size: cover;
 	  background-size: cover;
-	  height: calc(100vh - 60px);
+	  height: calc(100vh - 60px); 
 }
 
 #getStarted{
@@ -294,9 +294,12 @@ FIXES
 .ui.buttons .button:last-child{
 	border-left:1px solid #575757;
 }
-.ui.buttons .button:first-child{
+/*.ui.buttons .button:first-child{
 	border-right:3px solid #575757;
-}
+}*/
 .ui .segment{
 	padding:0.4em 0.4em !important;
+}
+.ui.ab.cards>.card{
+	border-radius:1px;
 }

@@ -12,3 +12,6 @@ llauth.readthedocs.org/en/latest/providers.html
 
 *MARKDOWN cheatsheet :P*
 1. https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet#headers
+
+*SEXY cheeje*
+1. http://livestyle.io/

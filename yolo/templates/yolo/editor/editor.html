@@ -1,8 +1,8 @@
 {% extends "yolo/editor/editor_layout.html" %}
 {% block content %}
-<link rel="stylesheet" type="text/css" href="static/css/dragger.css">
-<link rel="stylesheet" type="text/css" href="static/css/colorpicker.css">
-<link rel="stylesheet" type="text/css" href="static/bowerComponents/jquery-ui-1.11.4.custom/jquery-ui.min.css">
+<link rel="stylesheet" type="text/css" href="/static/css/dragger.css">
+<link rel="stylesheet" type="text/css" href="/static/css/colorpicker.css">
+<link rel="stylesheet" type="text/css" href="/static/bowerComponents/jquery-ui-1.11.4.custom/jquery-ui.min.css">
 <div class="ui ab grid" >
 	<div class="four wide column" id="editorSidebar">
 		
@@ -25,7 +25,7 @@
 		<div class="container">
 			<div class="content">
 				<div class="mockup-browser">
-					{{mockup | safe}}
+					{{template.htmlCode | safe}}
 				</div><!-- /mockup-browser -->
 			</div><!-- /content -->
 			{% include "yolo/editor/colorTool.html"%}
@@ -36,9 +36,28 @@
 {% endblock %}
 
 {% block js_footer %}
-	<script type="text/javascript" src="static/bowerComponents/jquery-ui-1.11.4.custom/jquery-ui.min.js"></script>
-	<script type="text/javascript" src="static/js/colorpicker.js"></script>
-	<script type="text/javascript" src="static/js/colorDropper.js"></script>
-	<script type="text/javascript" src="static/js/editor.js"></script>
-	<script type="text/javascript" src="static/js/addComponents.js"></script>
+	<script type="text/javascript" src="/static/bowerComponents/jquery-ui-1.11.4.custom/jquery-ui.min.js"></script>
+	<script type="text/javascript" src="/static/js/colorpicker.js"></script>
+	<script type="text/javascript" src="/static/js/colorDropper.js"></script>
+	<script type="text/javascript" src="/static/js/editor.js"></script>
+	<script type="text/javascript" src="/static/js/addComponents.js"></script>
+	<script type="text/javascript">
+
+	$(document).ready(function(){
+		var csrftoken = getCookie('csrftoken');
+		$('#editorPublish').on('click',function(){
+			var x=$('.mockup-browser').html();
+			$.post('{{request.path}}',{csrfmiddlewaretoken:csrftoken,htmlCode:x},function(){
+				console.log('success');
+			})
+			.done(function(){
+				$.amaran({'message':'Successfull saved the changes!'});
+			})
+			.fail(function(err){
+				$.amaran({'message':'An error occured. Please try again later!'});
+				console.log(err);
+			});
+		});
+	});
+	</script>
 {% endblock %}

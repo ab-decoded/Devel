@@ -4,6 +4,20 @@ function insertTemplate(templateId){
 	$(target).html($(templateId).html);
 }
 
+function readURL(input) {
+   if (input.files && input.files[0]) {
+       var reader = new FileReader();
+
+       reader.onload = function (e) {
+           $('#blah')
+               .attr('src', e.target.result)
+               .width(150)
+               .height(200);
+       };
+       reader.readAsDataURL(input.files[0]);
+   }
+}
+
 var angreejiCounting=['zero','one','two','three','four','five','six','seven','eight','nine','ten','eleven','twelve','thirteen','fourteen','fifteen','sixteen'];
 
 function resizer(e){
@@ -60,7 +74,24 @@ function insertDiv(){
 	var divSize=$('.divSizeSelector>.column').attr('class').replace('ui-resizable','');
 	var x=$('<div></div>').addClass(divSize+' edit-area paint-area').append('<div class="paint-area paint-area--text edit-area edit-area--text" style=" ">hello-again-bc</div>');
 	inserter(x);
+}
+function insertImage(){
+	var x=$('<div class="edit-area image-resizable image-div" style="width:200px;height:200px;"></div');
+	inserter(x);
 
+	x.resizable({handles:'e, s'}).bind({
+		resizestart:function(event,ui){
+			// $(event.target).attr('class','column');
+			console.log('yo')
+			
+		},
+		resizestop:function(event,ui){
+			// var widthOfOneDiv=$('.columnSetup>.column').outerWidth();
+			// var widthOfResizable=$(event.target).width();
+			// var x=Math.round(widthOfResizable/widthOfOneDiv);
+			// $(event.target).addClass(angreejiCounting[x]+' wide column').css('width','');
+		}
+	});
 }
 
 function insertTable(){
@@ -147,6 +178,17 @@ $(document).ready(function(){
 			insertDiv();
 		});
 
+		//INSERT IMAGE
+		$('.insert-image').click(function(){
+			var csrftoken = getCookie('csrftoken');
+			$.post('/insertImage',{csrfmiddlewaretoken:csrftoken,image:$('#uploadImage').val()})
+			.done(function(data){
+				console.log(data);
+				console.log(yolo);
+			});
+			insertImage();
+		});
+
 		//TABLE-COLUMNS COUNT
 		$('#tableColumnsCount').on('change',function(){
 			tableColumnCount=$(this).val();
@@ -188,7 +230,8 @@ $(document).ready(function(){
 		  });
 		//TABLE-DELETE-ROW-INIT
 		$('body').on('click','.edit-area--table tr',function(){
-			$(this).addClass('currentRow styleTr').siblings('tr').removeClass('styleTr currentRow');
+			$(this).parents('table').find('tr').removeClass('styleTr currentRow');
+			$(this).addClass('styleTr currentRow');
 		});
 		
 	}

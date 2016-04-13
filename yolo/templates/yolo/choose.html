@@ -3,8 +3,8 @@
 {% block content %}
 <div class="ui ab center aligned container">
   <div class="content">
-  		<div id="mockupsDisplay">
-  			<b>CREATE A DESIGN</b>
+      <div id="mockupsDisplay">
+        <b>CREATE A DESIGN</b>
         <div style="color:#eee">
           Select a mockup to start the adventure.
         </div>
@@ -19,7 +19,7 @@
           {% endfor %}
         </div> -->
 
-        <div class="ui special cards" style="padding-top:20px;">
+        <div class="ui ab special cards" style="padding-top:20px;">
           {% for mockup in mockups %}
           <div class="card">
             <div class="blurring dimmable image">
@@ -55,7 +55,7 @@
             </div>
           <div class="content">
           
-              <form class="ui form" id="testDriveModalForm">
+              <form class="ui form" id="mockupForm">
                 {% csrf_token %}
                 <input type="hidden" id="mockupId" name="mockupId" value="">
                 <div class="field">
@@ -70,84 +70,77 @@
                 </div>
                 <div class="field">
                   <label>DESCRIPTION</label>
-                     <textarea name="description" type="text" id="testDriveDatePicker2" placeholder="This appears in the URL"></textarea>
+                     <textarea name="description" type="text" id="testDriveDatePicker2" placeholder="Template description"></textarea>
                 </div>
                   <div class="ui submit button" id="createTemplate">READY SET GO!</div>
                   <div class="ui error message"></div>
               </form>
           </div>
         </div>
-  		</div>
-  		<div id="yourTemplates">
-  			<div style="font-size:30px;">Your first design gonna be amazing!</div>
-  			<div style="padding:20px;">Oopie, so empty here! Create something to showcase here!</div>
-  			<div style="font-size:25px;font-weight:600;color:#DADADA;-webkit-transform: rotate(90deg);transform: rotate(90deg);">:)</div>
-  		</div>
+      </div>
+      <div id="yourTemplates">
+
+      {% if templates|length > 0 %}
+        <h3 style="color:#575757">YOUR TEMPLATES</h3>
+        <div class="ui ab cards centered" id="templatesContainer">
+        {% for template in templates %}
+          <div class="card">
+            <div class="content left aligned">
+              <div class="header">
+                <a href="/showcase/{{request.user}}/{{template.slug}}">{{template.name}}</a>
+              </div>
+              <div class="meta">
+                <b>Slug:</b>{{template.slug}}
+              </div>
+              <div class="description">
+                {{template.description}}
+              </div>
+              <div class="postedDate right aligned">-{{template.pub_date}}</div>
+            </div>
+            <div class="extra content">
+              <div class="ui two buttons">
+                <a class="ui basic green button"href="/editor/{{template.slug}}">Edit</a>
+                <a class="ui basic red button" onclick="deleteTemplate(this,'{{template.slug}}')">Delete</a>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+        </div>   
+      {% else %}
+        <div style="font-size:30px;">Your first design gonna be amazing!</div>
+        <div style="padding:20px;">Oopie, so empty here! Create something to showcase here!</div>
+        <div style="font-size:25px;font-weight:600;color:#DADADA;-webkit-transform: rotate(90deg);transform: rotate(90deg);">:)</div>
+   
+      {% endif %}
+      </div>
   </div>
 </div>
+
+<script type="text/jquery-model" id="templateToInsert">
+  <div class="card">
+    <div class="content left aligned">
+      <div class="header">
+        <a href="" class="createdName"></a>
+      </div>
+      <div class="meta createdSlug">
+        <b>Slug:</b>
+      </div>
+      <div class="description createdDescription">
+      </div>
+      <div class="postedDate right aligned">-Just Now</div>
+    </div>
+    <div class="extra content">
+      <div class="ui two buttons">
+        <a class="ui basic green button createdLink" href="/editor/">Edit</a>
+        <a class="ui basic red button newlyCreatedCantBeDeleted">Delete</a>
+      </div>
+    </div>
+  </div>
+</script>
+
 {% endblock %}
 
 {% block js_footer %}
-<script type="text/javascript">
-	$(document).ready(function(){
-
-    $('.ui.form')
-      .form({
-        fields: {
-          name: {
-            identifier : 'name',
-            rules: [
-              {
-                type   : 'empty',
-                prompt : 'Please enter a password'
-              }
-            ]
-          },
-          slug: {
-            identifier : 'slug',
-            rules: [
-              {
-                type   : 'regExp[/^[a-z0-9-]+$/]',
-                prompt : 'Enter a valid Slug'
-              }
-            ]
-          }
-        },
-        onSuccess:function(event,fields){
-          event.preventDefault();
-          console.log('hey');
-          $('#createTemplate').addClass('loading');
-          $('#createTemplate').attr('disabled',true);
-          fields.type="mockup"
-          $.post('/choose', fields).done(function(data){
-            console.log(data);
-            $('#createTemplate').removeClass('loading');
-            $('#createTemplate').attr('disabled',false);
-          });
-          
-            // console.log(data.errors);
-             // $('.message').html(data.message);
-             // of course you can do something more fancy with your respone
-          return false;
-        }
-      });
-      
-    
-    $('.special.cards .image').dimmer({
-      on: 'hover'
-    });
-
-    $('.chooseMockup').on('click',function(e){
-      $('#mockupId').val($(e.target).data('mockupid'));
-      // console.log($(e.target).data('mockupid'));
-      $('.ui.modal.chooseMockupModal').modal('show');
-    });
-
-    $('.closeModal').on('click',function(){
-      $('.ui.modal.chooseMockupModal').modal('hide');
-    });
-
-
-	});
-</script>
+<script type="text/javascript" src="/static/js/moment.js"></script>
+<script type="text/javascript" src="/static/js/choose.js"></script>
 {% endblock %}

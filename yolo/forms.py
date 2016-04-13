@@ -16,7 +16,14 @@ class UserForm(forms.ModelForm):
             raise forms.ValidationError(u'Email addresses must be unique.')
         return email
 
-class UserProfileForm(forms.ModelForm):
-    class Meta:
-        model = UserProfile
-        fields = ('website',)
+# class UserProfileForm(forms.ModelForm):
+#     class Meta:
+#         model = UserProfile
+#         fields = ('website',)
+#         
+
+
+# class ImageForm(forms.ModelForm):
+#     class Meta:
+#         model= Template_images
+#         fields=('template','image')

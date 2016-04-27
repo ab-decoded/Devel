@@ -1,4 +1,4 @@
-from yolo.models import UserProfile
+from yolo.models import UserProfile,Template_images
 from django.contrib.auth.models import User
 from django import forms
 
@@ -23,7 +23,8 @@ class UserForm(forms.ModelForm):
 #         
 
 
-# class ImageForm(forms.ModelForm):
-#     class Meta:
-#         model= Template_images
-#         fields=('template','image')
+class ImageForm(forms.Form):
+    image=forms.ImageField()
+    # class Meta:
+    #     model=Template_images
+    #     fields=('image',)

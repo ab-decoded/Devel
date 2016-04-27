@@ -63,6 +63,7 @@
               template.find('.createdSlug').append(data.template.slug);
               template.find('.createdDescription').html(data.template.description);
               template.find('.createdLink').attr('href','/editor/'+data.template.slug);
+              $('#emptyMessage').hide();
               template.appendTo('#templatesContainer');
             }
             $.amaran({'message':data.message});

@@ -11,8 +11,7 @@ function readURL(input) {
        reader.onload = function (e) {
            $('#blah')
                .attr('src', e.target.result)
-               .width(150)
-               .height(200);
+               .width(150);
        };
        reader.readAsDataURL(input.files[0]);
    }
@@ -54,7 +53,10 @@ function inserter(x){
 			$(x).insertBefore($('.selected-area'));
 			break;
 		case 'into':
-			$(x).appendTo($('.selected-area'));
+			if($('.selected-area').hasClass('edit-area--text'))
+				$.amaran({'message':'Could not insert into a text area'});
+			else
+				$(x).appendTo($('.selected-area'));
 			break;
 		default:
 			console.log('WTF! Chu hai kya be :|');
@@ -62,7 +64,9 @@ function inserter(x){
 }
 
 function insertGrid(divSizes){
-	var x=	$('<div class="ui container ab grid edit-area edit-area--div paint-area grid" style="margin:0"></div>');
+	var x=	$('<div class="ui container ab grid edit-area edit-area--div paint-area" style="margin:0"></div>');
+	if($('input[name="stackable"]').is(":checked"))
+		x.addClass('stackable')
 	divSizes.forEach(function(yo){
 		yo+=' edit-area paint-area';
 		$('<div></div>').addClass(yo).append('<div class="paint-area paint-area--text edit-area edit-area--text" style=" ">hello-again-bc</div>').appendTo(x);
@@ -75,15 +79,16 @@ function insertDiv(){
 	var x=$('<div></div>').addClass(divSize+' edit-area paint-area').append('<div class="paint-area paint-area--text edit-area edit-area--text" style=" ">hello-again-bc</div>');
 	inserter(x);
 }
-function insertImage(){
-	var x=$('<div class="edit-area image-resizable image-div" style="width:200px;height:200px;"></div');
+function insertImage(url){
+	var x=$('<div class="edit-area image-resizable image-div" style="overflow:hidden;width:200px;height:200px;">\
+		<img class="ui fluid image">\
+		</div>');
+	x.children('img').attr('src',url);
 	inserter(x);
-
 	x.resizable({handles:'e, s'}).bind({
 		resizestart:function(event,ui){
 			// $(event.target).attr('class','column');
-			console.log('yo')
-			
+			console.log('yo');	
 		},
 		resizestop:function(event,ui){
 			// var widthOfOneDiv=$('.columnSetup>.column').outerWidth();
@@ -178,15 +183,37 @@ $(document).ready(function(){
 			insertDiv();
 		});
 
+		//INIT IMAGE RESIZE
+
+		console.log($('div.image-resizable'));
+		$('div.image-resizable').resizable({handles:'e, s'}).bind({
+			resizestart:function(event,ui){
+				// $(event.target).attr('class','column');
+				console.log('yo');	
+			},
+			resizestop:function(event,ui){
+			}
+		});
+
 		//INSERT IMAGE
-		$('.insert-image').click(function(){
-			var csrftoken = getCookie('csrftoken');
-			$.post('/insertImage',{csrfmiddlewaretoken:csrftoken,image:$('#uploadImage').val()})
-			.done(function(data){
-				console.log(data);
-				console.log(yolo);
-			});
-			insertImage();
+		$('#imageForm').submit(function(e){
+			console.log('Image form is submitted! Moving one step forward :)');
+		    e.preventDefault();
+		    var data = new FormData(this);
+		    $.ajax({
+		    	url:'/insertImage',
+		    	data:data,
+		    	cache:false,
+		    	processData:false,
+		    	contentType:false,
+		    	// contentType:'multipart/form-data',
+		    	type: 'POST',
+		    	dataType:'json',
+		    	success:function(data){
+		    		console.log(typeof(data));
+		    		insertImage(data.url);
+		    	}
+		    });
 		});
 
 		//TABLE-COLUMNS COUNT

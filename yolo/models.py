@@ -62,4 +62,6 @@ class Template(models.Model):
 
 class Template_images(models.Model):
     image=models.ImageField(upload_to='templateImages')
-    template=models.ForeignKey(Mockup,null=True)
+    template=models.ForeignKey(Template,null=True)
+    def __unicode__(self):
+        return self.image.url

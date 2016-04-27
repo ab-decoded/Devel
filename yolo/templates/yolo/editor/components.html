@@ -36,6 +36,10 @@ INSERT MODE
 	      	<div class="ui inverted transparent input">
 			  Number of divs: <input type="number" min="1" max="6" id="divsCount" style="width:50px;margin-left:20px;" value=1>
 			</div>
+			<div class="ui checkbox">
+				<input type="checkbox" name="stackable">
+				<label style="color:#fff">Stackable</label>
+			</div>
 			<div class="ui ab sizeSelector grid">
 				<div class="sixteen wide column"></div>
 			</div>
@@ -116,15 +120,16 @@ INSERT MODE
 		      IMAGE
 		    </div>
 		    <div class="content" style="font-weight:300;font-size:12px;">
-		    	<div class="ui form">
+		    	<form class="ui form" id="imageForm" enctype="multipart/form-data">
+		    		{% csrf_token %}
+		    		<input type="hidden" name="slug" value="{{template.slug}}">
 		    		<div class="field">
-			          	<input type='file' id="uploadImage" onchange="readURL(this);" />
-			          	  <img style="display:hidden;" id="blah" src="#" alt="your image" />
+			          	<input type='file' name="image" id="uploadImage" onchange="readURL(this);" />
+			          	  <img id="blah" src="#" alt="your image" />
 			          	<br>
-		    			
 		    		</div>
 				    <button type="submit" class="ab ui button inverted insert-image">INSERT</button>
-		    	</div>
+		    	</form>
 		    </div>
 		  </div>
 		</div>

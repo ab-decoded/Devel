@@ -17,4 +17,6 @@ urlpatterns=[
 	url(r'^sign-in$',views.signin,name="signin"),
 	url(r'^sign-up$',views.signup,name="signup"),
 	url(r'^logout$',views.user_logout,name="logout"),
+	# 404
+	url(r'^notFound$',views.notFound,name="notFound"),
 ]

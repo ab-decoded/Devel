@@ -69,14 +69,14 @@ function insertGrid(divSizes){
 		x.addClass('stackable')
 	divSizes.forEach(function(yo){
 		yo+=' edit-area paint-area';
-		$('<div></div>').addClass(yo).append('<div class="paint-area paint-area--text edit-area edit-area--text" style=" ">hello-again-bc</div>').appendTo(x);
+		$('<div></div>').addClass(yo).append('<div class="paint-area paint-area--text edit-area edit-area--text" style=" ">Add yout text</div>').appendTo(x);
 	});
 
 	inserter(x);
 }
 function insertDiv(){
 	var divSize=$('.divSizeSelector>.column').attr('class').replace('ui-resizable','');
-	var x=$('<div></div>').addClass(divSize+' edit-area paint-area').append('<div class="paint-area paint-area--text edit-area edit-area--text" style=" ">hello-again-bc</div>');
+	var x=$('<div></div>').addClass(divSize+' edit-area paint-area').append('<div class="paint-area paint-area--text edit-area edit-area--text" style=" ">Add your text</div>');
 	inserter(x);
 }
 function insertImage(url){

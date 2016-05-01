@@ -15,8 +15,8 @@ def cleanHTML(temp,removeSet):
 	for word in removeSet:
 		if word in temp:
 			temp=temp.replace(word,"")
-	return ' '.join(temp.split())
-
+	# return ' '.join(temp.split())
+	return temp.lstrip()
 def index(request):
 	return render(request,'yolo/index.html')
 
@@ -44,14 +44,19 @@ def downloadAsZip(request,username,slug):
 		print image
 		fdir,fname=os.path.split(os.path.join(settings.PROJECT_ROOT,'../devel_main/media/'+image['image']))
 		zip_path = os.path.join("static/templateImages",fname)
-		f=open(os.path.join(settings.PROJECT_ROOT,'../devel_main/media/'+image['image']))
-		zf.writestr(zip_path,f.read())
-		f.close()
+		image_path=os.path.join(settings.PROJECT_ROOT,'../devel_main/media/'+image['image'])
+		if(os.path.exists(image_path)):
+			f=open(image_path)
+			zf.writestr(zip_path,f.read())
+			f.close()
 
-	with open(os.path.join(settings.PROJECT_ROOT,'../yolo/static/index.html'), 'r') as myfile:
-	    data=myfile.read().replace('\n', '')
+	with open(os.path.join(settings.PROJECT_ROOT,'../yolo/static/header.html'), 'r') as myfile:
+	    data=myfile.read()
 	print temp.cleanedHtml
-	data+=temp.cleanedHtml
+	data+=temp.cleanedHtml.replace('/media','./static')
+	with open(os.path.join(settings.PROJECT_ROOT,'../yolo/static/footer.html'), 'r') as myfile:
+	    footer_data=myfile.read()
+	data+=footer_data
 	# zf.writestr("index.html",temp.cleanedHtml.encode('utf-8'))
 	zf.writestr("index.html",data.encode('utf-8'))
 	# Must close zip for all contents to be written
@@ -115,6 +120,9 @@ def deleteTemplate(request,slug):
 		Template.objects.filter(slug=data['slug']).delete()
 		return HttpResponse('Successfully Deleted'); 
 
+def notFound(request):
+	return render(request,'yolo/partials/404.html'); 
+
 
 # def userTemplates(request):
 ''' For GET request- Currently not used!!! '''
@@ -123,12 +131,15 @@ def deleteTemplate(request,slug):
 # 		print data
 # 		return HttpResponse(json.dumps({'templates':data}));
 
-
+@login_required(login_url='/sign-in')
 def editor(request,slug):
 	# print os.chdir()
 	# fn = os.path.join(settings.PROJECT_ROOT, '../yolo/templates/yolo/editor/mockup.html');
 	# mockup = open(fn)
-	t=Template.objects.get(slug=slug)
+	try:
+		t=Template.objects.get(slug=slug,userId=request.user)
+	except Template.DoesNotExist:
+		return redirect('/notFound')
 	if request.method=='POST':
 		html=request.POST.dict()['htmlCode']
 		t.htmlCode=cleanHTML(html,{'ui-resizable'})
@@ -190,7 +201,7 @@ def signin(request):
     
     return render(request,'yolo/accounts/signin.html', {'errors':errors})
 
-@login_required
+@login_required(login_url='/sign-in')
 def user_logout(request):
     # Since we know the user is logged in, we can now just log them out.
     logout(request)

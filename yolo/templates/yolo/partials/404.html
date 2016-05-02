@@ -1,0 +1,46 @@
+{% extends "yolo/partials/layout.html" %}
+{% block style_block %}
+	
+	<link href='https://fonts.googleapis.com/css?family=Candal' rel='stylesheet' type='text/css'>
+	<style type="text/css">
+		html,body{
+			padding:0;
+			margin:0;
+		}
+		#lost{ 
+			  background: url(static/images/lost.jpg) no-repeat center center fixed;
+			  -webkit-background-size: cover;
+			  -moz-background-size: cover;
+			  -o-background-size: cover;
+			  background-size: cover;
+			  margin:0;
+			  height: calc(100vh); 
+		}
+		#error404{
+			width:250px;
+			position:absolute;
+			top:30%;
+			line-height: 50px;
+			left:48%;
+			color:#252525;
+			font-weight:700;
+			text-align:center;
+			margin-left:-100px;
+		}
+		.largeText{
+			font-size:75px;
+			font-family: 'Candal', sans-serif;
+		}
+	</style>
+{% endblock %}
+{% block content %}
+<div class="ui ab container" id="lost">
+  <div class="content">
+    <div id="error404">
+    	<div class="largeText">404</div>
+		<div class="smallText">Haww, ye kaha aa gaye...</div>
+   		<a href='/' style="border:solid 3px #FF4B4B;color:#FF4B4B;background:#fff;padding:10px 30px;">RETURN HOME</a>
+    </div>
+  </div>
+</div>
+{% endblock %}

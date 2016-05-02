@@ -1,0 +1,148 @@
+{% extends "yolo/partials/layout.html" %}
+
+{% block content %}
+<div class="ui ab center aligned container">
+  <div class="content">
+      <div id="mockupsDisplay">
+        <b>CREATE A DESIGN</b>
+        <div style="color:#eee">
+          Select a mockup to start the adventure.
+        </div>
+<!--         <div class="ui six column grid" style="padding-top: 30px;">
+          
+          {% for mockup in mockups %}
+            <div class="column">
+              <img class="ui small image" src="{{mockup.img.url}}">
+              {{ mockup.name }}
+              
+            </div>
+          {% endfor %}
+        </div> -->
+
+        <div class="ui ab special cards" style="padding-top:20px;">
+          {% for mockup in mockups %}
+          <div class="card">
+            <div class="blurring dimmable image">
+              <div class="ui inverted dimmer">
+                <div class="content">
+                  <div class="center">
+                    <div class="ui inverted red button chooseMockup" data-mockupid="{{mockup.id}}">+</div>
+                  </div>
+                </div>
+              </div>
+              <img src="{{mockup.img.url}}">
+            </div>
+            <div class="content">
+              <div class="header">{{mockup.name}}</div>
+              <div class="description">
+                {{mockup.description}}
+              </div>
+            </div>
+            <div class="extra content">
+              <span class="right floated">
+                - {{mockup.author}}
+              </span>
+              
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+
+        <div class="ab ui small modal chooseMockupModal">
+            <div class="header">
+              Getting started!
+              <a class="fa fa-close closeModal"></a>
+            </div>
+          <div class="content">
+          
+              <form class="ui form" id="mockupForm">
+                {% csrf_token %}
+                <input type="hidden" id="mockupId" name="mockupId" value="">
+                <div class="field">
+                  <label>NAME YOUR TEMPLATE</label>
+                  <div class="ui input">
+                    <input name="name" type="text" placeholder="A beautiful name for your beautiful template!">
+                  </div>
+                </div>
+                <div class="field">
+                  <label>SLUG</label>
+                    <input name="slug" type="text" placeholder="This appears in the URL"/>
+                </div>
+                <div class="field">
+                  <label>DESCRIPTION</label>
+                     <textarea name="description" type="text" id="testDriveDatePicker2" placeholder="Template description"></textarea>
+                </div>
+                  <div class="ui submit button" id="createTemplate">READY SET GO!</div>
+                  <div class="ui error message"></div>
+              </form>
+          </div>
+        </div>
+      </div>
+      <div id="yourTemplates">
+
+      {% if templates|length > 0 %}
+        <h3 style="color:#575757">YOUR TEMPLATES</h3>
+        <div class="ui ab cards centered" id="templatesContainer">
+        {% for template in templates %}
+          <div class="card">
+            <div class="content left aligned">
+              <div class="header">
+                <a href="/showcase/{{request.user}}/{{template.slug}}">{{template.name}}</a>
+              </div>
+              <div class="meta">
+                <b>Slug:</b>{{template.slug}}
+              </div>
+              <div class="description">
+                {{template.description}}
+              </div>
+              <div class="postedDate right aligned">-{{template.pub_date}}</div>
+            </div>
+            <div class="extra content">
+              <div class="ui two buttons">
+                <a class="ui basic green button"href="/editor/{{template.slug}}">Edit</a>
+                <a class="ui basic red button" onclick="deleteTemplate(this,'{{template.slug}}')">Delete</a>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+        </div>   
+      {% else %}
+      <div id="emptyMessage">
+        <div style="font-size:30px;">Your first design gonna be amazing!</div>
+        <div style="padding:20px;">Oopie, so empty here! Create something to showcase here!</div>
+        <div style="font-size:25px;font-weight:600;color:#DADADA;-webkit-transform: rotate(90deg);transform: rotate(90deg);">:)</div>
+      </div>
+        <div class="ui ab cards centered" id="templatesContainer"></div>
+      {% endif %}
+      </div>
+  </div>
+</div>
+
+<script type="text/jquery-model" id="templateToInsert">
+  <div class="card">
+    <div class="content left aligned">
+      <div class="header">
+        <a href="" class="createdName"></a>
+      </div>
+      <div class="meta createdSlug">
+        <b>Slug:</b>
+      </div>
+      <div class="description createdDescription">
+      </div>
+      <div class="postedDate right aligned">-Just Now</div>
+    </div>
+    <div class="extra content">
+      <div class="ui two buttons">
+        <a class="ui basic green button createdLink" href="/editor/">Edit</a>
+        <a class="ui basic red button newlyCreatedCantBeDeleted">Delete</a>
+      </div>
+    </div>
+  </div>
+</script>
+
+{% endblock %}
+
+{% block js_footer %}
+<script type="text/javascript" src="/static/js/moment.js"></script>
+<script type="text/javascript" src="/static/js/choose.js"></script>
+{% endblock %}

@@ -1,4 +1,4 @@
-from yolo.models import UserProfile
+from yolo.models import UserProfile,Template_images
 from django.contrib.auth.models import User
 from django import forms
 
@@ -16,7 +16,15 @@ class UserForm(forms.ModelForm):
             raise forms.ValidationError(u'Email addresses must be unique.')
         return email
 
-class UserProfileForm(forms.ModelForm):
-    class Meta:
-        model = UserProfile
-        fields = ('website',)
+# class UserProfileForm(forms.ModelForm):
+#     class Meta:
+#         model = UserProfile
+#         fields = ('website',)
+#         
+
+
+class ImageForm(forms.Form):
+    image=forms.ImageField()
+    # class Meta:
+    #     model=Template_images
+    #     fields=('image',)

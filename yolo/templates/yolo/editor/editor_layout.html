@@ -1,15 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+  {% load static %}
     <meta charset="utf-8">
     <title>My Tumblelog</title>
-    <link rel="stylesheet" type="text/css" href="static/bowerComponents/semantic/dist/semantic.css">
-    <link rel="stylesheet" type="text/css" href="static/bowerComponents/font-awesome/css/font-awesome.css">
-    <link rel="stylesheet" type="text/css" href="static/css/navbar.css">
-    <link rel="stylesheet" type="text/css" href="static/css/style.css">
-    <link rel="stylesheet" type="text/css" href="static/css/components.css">
-    <link rel="stylesheet" type="text/css" href="static/css/ab-custom.css">
-    <script type="text/javascript" src="static/bowerComponents/jquery/dist/jquery.js"></script>
+    <link rel="stylesheet" type="text/css" href="/static/bowerComponents/semantic/dist/semantic.css">
+    <link rel="stylesheet" type="text/css" href="/static/bowerComponents/font-awesome/css/font-awesome.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/navbar.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/style.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/components.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/ab-custom.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/amaran.min.css">
+    <script type="text/javascript" src="/static/bowerComponents/jquery/dist/jquery.js"></script>
   </head>
 
   <body>
@@ -20,11 +22,11 @@
         <div class="ab dropdown-menu left">
           <div class="ui grid">
             <div class="six wide row column item">
-              <div class="hiUser" style="padding-top:20px;font-size:15px;">
-                Hi <b>{username}</b>!
-              </div>
-              <div class="settings dotted-link-white">
-                Manage Account
+              <div class="ui row hiUser" style="padding-top:20px;font-size:15px;">
+                Hi <b>{{user.username}}</b>!
+              </div><br>
+              <div class="settings" style="width:100%">
+                <span class="dotted-link-white">Manage Account</span>
               </div>
               <div class="getHelp" style="font-size:11px;">Need help customizing your website. <a href="#" class="dotted-link-white" style="color:#fff !important;">Get Help</a></div>
             </div>
@@ -41,7 +43,8 @@
       </div>
       <div class="item"></div>
         <div class="right menu">        
-          <a class="item focus" id="editorPreview" style="color:#575757 !important;background:#ACF0F2 !important">Preview</a>
+          <a href="/downloadAsZip/{{user.username}}/{{template.slug}}" style="margin:5px;background:#00B5AD;border-radius:40px !important;color:#252525 !important;padding-left:15px;padding-right:15px;" class="item"><i class="fa fa-download"></i></a>
+          <a class="item focus" id="editorPreview"  href="/showcase/{{user.username}}/{{template.slug}}" style="color:#575757 !important;background:#ACF0F2 !important">Preview</a>
           <a class="item focus" id="editorPublish" style="color:#fff !important;background:#1695A3 !important">Publish</a>
         </div>
     </div>
@@ -72,11 +75,13 @@
             {% block page_header %}{% endblock %}
             {% block content %}{% endblock %}
             {% include 'yolo/editor/partials/custom-menu.html' %}
-            <script type="text/javascript" src="static/bowerComponents/semantic/dist/semantic.js"></script>
-            <script type="text/javascript" src="static/bowerComponents/interact/dist/interact.js"></script>
-            <script type="text/javascript" src="static/bowerComponents/classie/classie.js"></script>
-            <script type="text/javascript" src="static/js/modernizr.js"></script>
-            <script type="text/javascript" src="static/js/navbar.js"></script>
+            <script type="text/javascript" src="/static/js/shared.js"></script>
+            <script type="text/javascript" src="/static/bowerComponents/semantic/dist/semantic.js"></script>
+            <script type="text/javascript" src="/static/bowerComponents/interact/dist/interact.js"></script>
+            <script type="text/javascript" src="/static/bowerComponents/classie/classie.js"></script>
+            <script type="text/javascript" src="/static/js/modernizr.js"></script>
+            <script type="text/javascript" src="/static/js/navbar.js"></script>
+            <script type="text/javascript" src="/static/js/jquery.amaran.min.js"></script>
             {% block js_footer %}{% endblock %}
       </div>
     </div>  

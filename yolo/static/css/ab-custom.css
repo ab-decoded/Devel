@@ -63,3 +63,56 @@
 .ab-style-underline{
 	text-decoration:underline !important;
 }
+
+
+
+.ui.modal{
+	top:40% !important;
+	box-shadow:none !important;
+	border-radius:0 !important;
+}
+}
+@media only screen and (min-width: 1200px){
+	.ui.small.modal{
+		width:450px;
+		margin:0em 0em 0em -225px
+		
+	}
+}
+@media only screen and (min-width: 992px){
+	.ui.small.modal{
+		width:450px;
+		margin:0em 0em 0em -225px
+		
+	}
+}
+@media only screen and (min-width: 768px){
+	.ui.small.modal{
+		width:450px;
+		margin:0em 0em 0em -225px
+	}
+}
+@media all and (max-width: 520px){
+	.ui.small.modal{
+		width:100%;
+		min-height:100vh;
+	}
+	.modals.dimmer .ui.scrolling.modal{
+		margin-top:0 !important;	
+		margin-bottom:0 !important;	
+	}
+	.picker__holder{
+		max-width: 360px !important;
+	}
+	#testDriveModalForm{
+		padding-left:0px;
+		padding-right:0px;
+	}
+	.variantDisplay{
+		margin-left:0px;
+		margin-right:0px;
+		padding:4px;
+		background:rgb(71, 169, 215);
+		color:#F8F8F6;
+	}
+}	

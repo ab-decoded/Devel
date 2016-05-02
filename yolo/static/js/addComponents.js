@@ -66,7 +66,9 @@ function inserter(x){
 function insertGrid(divSizes){
 	var x=	$('<div class="ui container ab grid edit-area edit-area--div paint-area" style="margin:0"></div>');
 	if($('input[name="stackable"]').is(":checked"))
-		x.addClass('stackable')
+		x.addClass('stackable');
+	if($('input[name="centered"]').is(":checked"))
+		x.addClass('center aligned');
 	divSizes.forEach(function(yo){
 		yo+=' edit-area paint-area';
 		$('<div></div>').addClass(yo).append('<div class="paint-area paint-area--text edit-area edit-area--text" style=" ">Add yout text</div>').appendTo(x);

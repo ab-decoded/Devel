@@ -215,3 +215,5 @@ def user_logout(request):
 #     response = render(request,'yolo/partials/404.html')
 #     response.status_code = 404
 #     return response
+
+

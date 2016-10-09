@@ -3,15 +3,16 @@
 # Translators:
 # Fery Setiawan <gembelweb@gmail.com>, 2015
 # Jannis Leidel <jannis@leidel.info>, 2011
+# oon arfiandwi <oon.arfiandwi@gmail.com>, 2016
 # rodin <romihardiyanto@gmail.com>, 2011,2013
 # rodin <romihardiyanto@gmail.com>, 2013-2015
 msgid ""
 msgstr ""
 "Project-Id-Version: django\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-10 15:10+0200\n"
-"PO-Revision-Date: 2015-12-15 22:47+0000\n"
-"Last-Translator: Fery Setiawan <gembelweb@gmail.com>\n"
+"POT-Creation-Date: 2016-05-17 23:12+0200\n"
+"PO-Revision-Date: 2016-05-21 08:38+0000\n"
+"Last-Translator: Jannis Leidel <jannis@leidel.info>\n"
 "Language-Team: Indonesian (http://www.transifex.com/django/django/language/"
 "id/)\n"
 "MIME-Version: 1.0\n"
@@ -31,7 +32,7 @@ msgstr "Tanggal penting"
 
 #, python-format
 msgid "%(name)s object with primary key %(key)r does not exist."
-msgstr ""
+msgstr "%(name)s objek dengan primary key %(key)r tidak ditemukan."
 
 msgid "Password changed successfully."
 msgstr "Sandi berhasil diubah."
@@ -114,6 +115,21 @@ msgstr "salt"
 msgid "hash"
 msgstr "hash"
 
+msgid "variety"
+msgstr ""
+
+msgid "version"
+msgstr ""
+
+msgid "memory cost"
+msgstr ""
+
+msgid "time cost"
+msgstr ""
+
+msgid "parallelism"
+msgstr ""
+
 msgid "work factor"
 msgstr "faktor kerja"
 
@@ -167,14 +183,7 @@ msgstr "Hak akses khusus untuk pengguna ini."
 msgid "username"
 msgstr "nama pengguna"
 
-msgid "Required. 30 characters or fewer. Letters, digits and @/./+/-/_ only."
-msgstr ""
-"Wajib. 30 karakter atau kurang dalam kombinasi huruf, angka, dan karakter "
-"@/./+/-/_ ."
-
-msgid ""
-"Enter a valid username. This value may contain only letters, numbers and @/./"
-"+/-/_ characters."
+msgid "Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only."
 msgstr ""
 
 msgid "A user with that username already exists."
@@ -222,18 +231,20 @@ msgid_plural ""
 "This password is too short. It must contain at least %(min_length)d "
 "characters."
 msgstr[0] ""
+"Kata sandi terlalu singkat. Kata sandi harus memuat setidaknya "
+"%(min_length)d huruf."
 
 #, python-format
 msgid "Your password must contain at least %(min_length)d character."
 msgid_plural "Your password must contain at least %(min_length)d characters."
-msgstr[0] ""
+msgstr[0] "Kata sandi anda harus memuat setidaknya %(min_length)d huruf."
 
 #, python-format
 msgid "The password is too similar to the %(verbose_name)s."
-msgstr ""
+msgstr "Kata sandi terlalu mirip dengan %(verbose_name)s."
 
 msgid "Your password can't be too similar to your other personal information."
-msgstr ""
+msgstr "Kata sandi tidak boleh terlalu mirip dengan informasi personal lainnya"
 
 msgid "This password is too common."
 msgstr "Kata sandi ini terlalu umum."
@@ -251,6 +262,16 @@ msgstr "Kata sandi anda tidak dapat seluruhnya numerik."
 msgid "Password reset on %(site_name)s"
 msgstr "Penyetelan ulang sandi di %(site_name)s"
 
+msgid ""
+"Enter a valid username. This value may contain only English letters, "
+"numbers, and @/./+/-/_ characters."
+msgstr ""
+
+msgid ""
+"Enter a valid username. This value may contain only letters, numbers, and "
+"@/./+/-/_ characters."
+msgstr ""
+
 msgid "Logged out"
 msgstr "Keluar"
 
@@ -258,7 +279,7 @@ msgid "Password reset"
 msgstr "Setel ulang sandi"
 
 msgid "Password reset sent"
-msgstr ""
+msgstr "Reset kata sandi terkirim"
 
 msgid "Enter new password"
 msgstr "Masukkan sandi baru"

@@ -1,2 +1,5 @@
 *.pyc
 env/
+*.sublime-project
+deploy/
+devel_main/media/

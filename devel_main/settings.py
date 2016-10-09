@@ -25,9 +25,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'lq@&gw4)ishaw^w^)s9-8!3f^ponu@u+idhuh*+njdd6j3a9z#'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost']
 
 
 # Application definition
@@ -166,5 +166,7 @@ CACHES = {
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 
 MEDIA_ROOT = os.path.join(PROJECT_ROOT, 'media')
-
 MEDIA_URL = '/media/'
+
+STATIC_ROOT = os.path.join(PROJECT_ROOT, 'static')
+STATIC_URL = '/static/'

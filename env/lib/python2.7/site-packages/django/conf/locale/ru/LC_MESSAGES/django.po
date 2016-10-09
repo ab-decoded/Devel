@@ -5,18 +5,20 @@
 # Denis Darii <denis.darii@gmail.com>, 2011
 # Dimmus <dmitri.chudinov@gmail.com>, 2011
 # eigrad <andrew@ei-grad.ru>, 2012
-# Eugene MechanisM <contact@mechanism.name>, 2013
+# Eugene MechanisM <eugene@mechanism.pro>, 2013
 # eXtractor <evg.kirov@gmail.com>, 2015
 # Igor Melnyk, 2014
 # Jannis Leidel <jannis@leidel.info>, 2011
+# lilo.panic, 2016
 # Mikhail Zholobov <legal90@gmail.com>, 2013
-# Алексей Борискин <sun.void@gmail.com>, 2013-2015
+# Алексей Борискин <sun.void@gmail.com>, 2013-2016
+# Дмитрий Шатера <mr.bobsans@gmail.com>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: django\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-09 17:42+0200\n"
-"PO-Revision-Date: 2015-11-30 16:09+0000\n"
+"POT-Creation-Date: 2016-06-29 20:57+0200\n"
+"PO-Revision-Date: 2016-07-20 09:53+0000\n"
 "Last-Translator: Алексей Борискин <sun.void@gmail.com>\n"
 "Language-Team: Russian (http://www.transifex.com/django/django/language/"
 "ru/)\n"
@@ -69,6 +71,9 @@ msgstr "Датский"
 
 msgid "German"
 msgstr "Немецкий"
+
+msgid "Lower Sorbian"
+msgstr "Нижнелужицкий"
 
 msgid "Greek"
 msgstr "Греческий"
@@ -139,6 +144,9 @@ msgstr "Хинди"
 msgid "Croatian"
 msgstr "Хорватский"
 
+msgid "Upper Sorbian"
+msgstr "Верхнелужицкий"
+
 msgid "Hungarian"
 msgstr "Венгерский"
 
@@ -199,7 +207,7 @@ msgstr "Маратхи"
 msgid "Burmese"
 msgstr "Бирманский"
 
-msgid "Norwegian Bokmal"
+msgid "Norwegian Bokmål"
 msgstr "Норвежский (Букмол)"
 
 msgid "Nepali"
@@ -298,9 +306,6 @@ msgstr "Статические файлы"
 msgid "Syndication"
 msgstr "Ленты новостей"
 
-msgid "Web Design"
-msgstr "Генерация «рыбных» текстов"
-
 msgid "Enter a valid value."
 msgstr "Введите правильное значение."
 
@@ -308,7 +313,7 @@ msgid "Enter a valid URL."
 msgstr "Введите правильный URL."
 
 msgid "Enter a valid integer."
-msgstr "Введите целое число."
+msgstr "Введите правильное число."
 
 msgid "Enter a valid email address."
 msgstr "Введите правильный адрес электронной почты."
@@ -459,6 +464,9 @@ msgstr "Целое"
 msgid "'%(value)s' value must be an integer."
 msgstr "Значение '%(value)s' должно быть целым числом."
 
+msgid "Big (8 byte) integer"
+msgstr "Длинное целое (8 байт)"
+
 #, python-format
 msgid "'%(value)s' value must be either True or False."
 msgstr "Значение '%(value)s' должно быть True или False."
@@ -542,9 +550,6 @@ msgstr "Значение '%(value)s' должно быть числом с пл�
 msgid "Floating point number"
 msgstr "Число с плавающей запятой"
 
-msgid "Big (8 byte) integer"
-msgstr "Длинное целое (8 байт)"
-
 msgid "IPv4 address"
 msgstr "IPv4 адрес"
 
@@ -620,6 +625,14 @@ msgstr "Внешний Ключ (тип определен по связанно
 
 msgid "One-to-one relationship"
 msgstr "Связь \"один к одному\""
+
+#, python-format
+msgid "%(from)s-%(to)s relationship"
+msgstr "Связь %(from)s-%(to)s"
+
+#, python-format
+msgid "%(from)s-%(to)s relationships"
+msgstr "Связьи %(from)s-%(to)s"
 
 msgid "Many-to-many relationship"
 msgstr "Связь \"многие ко многим\""
@@ -1193,7 +1206,7 @@ msgid ""
 "your Django settings file and you haven't configured any URLs. Get to work!"
 msgstr ""
 "Вы видите это сообщение, потому что в файле ваших настроек Django есть "
-"строчка <code>DEBUG = True</code> и вы не сконфигурировали на одного URL. За "
+"строчка <code>DEBUG = True</code> и вы не сконфигурировали ни одного URL. За "
 "работу!"
 
 msgid "No year specified"

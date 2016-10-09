@@ -6,6 +6,7 @@ from collections import OrderedDict
 
 from django.core.management.base import BaseCommand, CommandError
 from django.db import DEFAULT_DB_ALIAS, connections
+from django.utils.encoding import force_text
 
 
 class Command(BaseCommand):
@@ -16,9 +17,14 @@ class Command(BaseCommand):
     db_module = 'django.db'
 
     def add_arguments(self, parser):
-        parser.add_argument('--database', action='store', dest='database',
-            default=DEFAULT_DB_ALIAS, help='Nominates a database to '
-            'introspect. Defaults to using the "default" database.')
+        parser.add_argument(
+            'table', action='store', nargs='*', type=str,
+            help='Selects what tables or views should be introspected.',
+        )
+        parser.add_argument(
+            '--database', action='store', dest='database', default=DEFAULT_DB_ALIAS,
+            help='Nominates a database to introspect. Defaults to using the "default" database.',
+        )
 
     def handle(self, **options):
         try:
@@ -32,8 +38,11 @@ class Command(BaseCommand):
         # 'table_name_filter' is a stealth option
         table_name_filter = options.get('table_name_filter')
 
-        table2model = lambda table_name: re.sub(r'[^a-zA-Z0-9]', '', table_name.title())
-        strip_prefix = lambda s: s[1:] if s.startswith("u'") else s
+        def table2model(table_name):
+            return re.sub(r'[^a-zA-Z0-9]', '', table_name.title())
+
+        def strip_prefix(s):
+            return s[1:] if s.startswith("u'") else s
 
         with connection.cursor() as cursor:
             yield "# This is an auto-generated Django model module."
@@ -50,29 +59,38 @@ class Command(BaseCommand):
             yield ''
             yield 'from %s import models' % self.db_module
             known_models = []
-            for table_name in connection.introspection.table_names(cursor):
+            tables_to_introspect = options['table'] or connection.introspection.table_names(cursor)
+
+            for table_name in tables_to_introspect:
                 if table_name_filter is not None and callable(table_name_filter):
                     if not table_name_filter(table_name):
                         continue
+                try:
+                    try:
+                        relations = connection.introspection.get_relations(cursor, table_name)
+                    except NotImplementedError:
+                        relations = {}
+                    try:
+                        indexes = connection.introspection.get_indexes(cursor, table_name)
+                    except NotImplementedError:
+                        indexes = {}
+                    try:
+                        constraints = connection.introspection.get_constraints(cursor, table_name)
+                    except NotImplementedError:
+                        constraints = {}
+                    table_description = connection.introspection.get_table_description(cursor, table_name)
+                except Exception as e:
+                    yield "# Unable to inspect table '%s'" % table_name
+                    yield "# The error was: %s" % force_text(e)
+                    continue
+
                 yield ''
                 yield ''
                 yield 'class %s(models.Model):' % table2model(table_name)
                 known_models.append(table2model(table_name))
-                try:
-                    relations = connection.introspection.get_relations(cursor, table_name)
-                except NotImplementedError:
-                    relations = {}
-                try:
-                    indexes = connection.introspection.get_indexes(cursor, table_name)
-                except NotImplementedError:
-                    indexes = {}
-                try:
-                    constraints = connection.introspection.get_constraints(cursor, table_name)
-                except NotImplementedError:
-                    constraints = {}
                 used_column_names = []  # Holds column names used in the table so far
                 column_to_field_name = {}  # Maps column names to names of model fields
-                for row in connection.introspection.get_table_description(cursor, table_name):
+                for row in table_description:
                     comment_notes = []  # Holds Field notes, to be displayed in a Python comment.
                     extra_params = OrderedDict()  # Holds Field parameters such as 'db_column'.
                     column_name = row[0]

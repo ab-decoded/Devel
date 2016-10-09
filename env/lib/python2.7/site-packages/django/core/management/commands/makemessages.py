@@ -16,7 +16,6 @@ from django.core.management.base import BaseCommand, CommandError
 from django.core.management.utils import (
     find_command, handle_extensions, popen_wrapper,
 )
-from django.utils import six
 from django.utils._os import upath
 from django.utils.encoding import DEFAULT_LOCALE_ENCODING, force_str
 from django.utils.functional import cached_property
@@ -31,28 +30,10 @@ NO_LOCALE_DIR = object()
 def check_programs(*programs):
     for program in programs:
         if find_command(program) is None:
-            raise CommandError("Can't find %s. Make sure you have GNU "
-                    "gettext tools 0.15 or newer installed." % program)
-
-
-def gettext_popen_wrapper(args, os_err_exc_type=CommandError, stdout_encoding="utf-8"):
-    """
-    Makes sure text obtained from stdout of gettext utilities is Unicode.
-    """
-    # This both decodes utf-8 and cleans line endings. Simply using
-    # popen_wrapper(universal_newlines=True) doesn't properly handle the
-    # encoding. This goes back to popen's flaky support for encoding:
-    # https://bugs.python.org/issue6135. This is a solution for #23271, #21928.
-    # No need to do anything on Python 2 because it's already a byte-string there.
-    manual_io_wrapper = six.PY3 and stdout_encoding != DEFAULT_LOCALE_ENCODING
-
-    stdout, stderr, status_code = popen_wrapper(args, os_err_exc_type=os_err_exc_type,
-                                                universal_newlines=not manual_io_wrapper)
-    if manual_io_wrapper:
-        stdout = io.TextIOWrapper(io.BytesIO(stdout), encoding=stdout_encoding).read()
-    if six.PY2:
-        stdout = stdout.decode(stdout_encoding)
-    return stdout, stderr, status_code
+            raise CommandError(
+                "Can't find %s. Make sure you have GNU gettext tools 0.15 or "
+                "newer installed." % program
+            )
 
 
 @total_ordering
@@ -147,13 +128,18 @@ class BuildFile(object):
         # Remove '.py' suffix
         if os.name == 'nt':
             # Preserve '.\' prefix on Windows to respect gettext behavior
-            old = '#: ' + self.work_path
-            new = '#: ' + self.path
+            old_path = self.work_path
+            new_path = self.path
         else:
-            old = '#: ' + self.work_path[2:]
-            new = '#: ' + self.path[2:]
+            old_path = self.work_path[2:]
+            new_path = self.path[2:]
 
-        return msgs.replace(old, new)
+        return re.sub(
+            r'^(#: .*)(' + re.escape(old_path) + r')',
+            lambda match: match.group().replace(old_path, new_path),
+            msgs,
+            flags=re.MULTILINE
+        )
 
     def cleanup(self):
         """
@@ -167,26 +153,53 @@ class BuildFile(object):
                 os.unlink(self.work_path)
 
 
+def normalize_eols(raw_contents):
+    """
+    Take a block of raw text that will be passed through str.splitlines() to
+    get universal newlines treatment.
+
+    Return the resulting block of text with normalized `\n` EOL sequences ready
+    to be written to disk using current platform's native EOLs.
+    """
+    lines_list = raw_contents.splitlines()
+    # Ensure last line has its EOL
+    if lines_list and lines_list[-1]:
+        lines_list.append('')
+    return '\n'.join(lines_list)
+
+
 def write_pot_file(potfile, msgs):
     """
     Write the :param potfile: POT file with the :param msgs: contents,
     previously making sure its format is valid.
     """
+    pot_lines = msgs.splitlines()
     if os.path.exists(potfile):
         # Strip the header
-        msgs = '\n'.join(dropwhile(len, msgs.split('\n')))
+        lines = dropwhile(len, pot_lines)
     else:
-        msgs = msgs.replace('charset=CHARSET', 'charset=UTF-8')
+        lines = []
+        found, header_read = False, False
+        for line in pot_lines:
+            if not found and not header_read:
+                found = True
+                line = line.replace('charset=CHARSET', 'charset=UTF-8')
+            if not line and not found:
+                header_read = True
+            lines.append(line)
+    msgs = '\n'.join(lines)
     with io.open(potfile, 'a', encoding='utf-8') as fp:
         fp.write(msgs)
 
 
 class Command(BaseCommand):
-    help = ("Runs over the entire source tree of the current directory and "
-"pulls out all strings marked for translation. It creates (or updates) a message "
-"file in the conf/locale (in the django tree) or locale (for projects and "
-"applications) directory.\n\nYou must run this command with one of either the "
-"--locale, --exclude or --all options.")
+    help = (
+        "Runs over the entire source tree of the current directory and "
+        "pulls out all strings marked for translation. It creates (or updates) a message "
+        "file in the conf/locale (in the django tree) or locale (for projects and "
+        "applications) directory.\n\nYou must run this command with one of either the "
+        "--locale, --exclude, or --all options."
+    )
 
     translatable_file_class = TranslatableFile
     build_file_class = BuildFile
@@ -200,46 +213,69 @@ class Command(BaseCommand):
     xgettext_options = ['--from-code=UTF-8', '--add-comments=Translators']
 
     def add_arguments(self, parser):
-        parser.add_argument('--locale', '-l', default=[], dest='locale', action='append',
+        parser.add_argument(
+            '--locale', '-l', default=[], dest='locale', action='append',
             help='Creates or updates the message files for the given locale(s) (e.g. pt_BR). '
-                 'Can be used multiple times.')
-        parser.add_argument('--exclude', '-x', default=[], dest='exclude', action='append',
-                    help='Locales to exclude. Default is none. Can be used multiple times.')
-        parser.add_argument('--domain', '-d', default='django', dest='domain',
-            help='The domain of the message files (default: "django").')
-        parser.add_argument('--all', '-a', action='store_true', dest='all',
-            default=False, help='Updates the message files for all existing locales.')
-        parser.add_argument('--extension', '-e', dest='extensions',
+                 'Can be used multiple times.',
+        )
+        parser.add_argument(
+            '--exclude', '-x', default=[], dest='exclude', action='append',
+            help='Locales to exclude. Default is none. Can be used multiple times.',
+        )
+        parser.add_argument(
+            '--domain', '-d', default='django', dest='domain',
+            help='The domain of the message files (default: "django").',
+        )
+        parser.add_argument(
+            '--all', '-a', action='store_true', dest='all', default=False,
+            help='Updates the message files for all existing locales.',
+        )
+        parser.add_argument(
+            '--extension', '-e', dest='extensions', action='append',
             help='The file extension(s) to examine (default: "html,txt,py", or "js" '
                  'if the domain is "djangojs"). Separate multiple extensions with '
                  'commas, or use -e multiple times.',
-            action='append')
-        parser.add_argument('--symlinks', '-s', action='store_true', dest='symlinks',
-            default=False, help='Follows symlinks to directories when examining '
-                                'source code and templates for translation strings.')
-        parser.add_argument('--ignore', '-i', action='append', dest='ignore_patterns',
+        )
+        parser.add_argument(
+            '--symlinks', '-s', action='store_true', dest='symlinks', default=False,
+            help='Follows symlinks to directories when examining source code '
+                 'and templates for translation strings.',
+        )
+        parser.add_argument(
+            '--ignore', '-i', action='append', dest='ignore_patterns',
             default=[], metavar='PATTERN',
             help='Ignore files or directories matching this glob-style pattern. '
-                 'Use multiple times to ignore more.')
-        parser.add_argument('--no-default-ignore', action='store_false', dest='use_default_ignore_patterns',
-            default=True, help="Don't ignore the common glob-style patterns 'CVS', '.*', '*~' and '*.pyc'.")
-        parser.add_argument('--no-wrap', action='store_true', dest='no_wrap',
-            default=False, help="Don't break long message lines into several lines.")
-        parser.add_argument('--no-location', action='store_true', dest='no_location',
-            default=False, help="Don't write '#: filename:line' lines.")
-        parser.add_argument('--no-obsolete', action='store_true', dest='no_obsolete',
-            default=False, help="Remove obsolete message strings.")
-        parser.add_argument('--keep-pot', action='store_true', dest='keep_pot',
-            default=False, help="Keep .pot file after making messages. Useful when debugging.")
+                 'Use multiple times to ignore more.',
+        )
+        parser.add_argument(
+            '--no-default-ignore', action='store_false', dest='use_default_ignore_patterns',
+            default=True, help="Don't ignore the common glob-style patterns 'CVS', '.*', '*~' and '*.pyc'.",
+        )
+        parser.add_argument(
+            '--no-wrap', action='store_true', dest='no_wrap',
+            default=False, help="Don't break long message lines into several lines.",
+        )
+        parser.add_argument(
+            '--no-location', action='store_true', dest='no_location',
+            default=False, help="Don't write '#: filename:line' lines.",
+        )
+        parser.add_argument(
+            '--no-obsolete', action='store_true', dest='no_obsolete',
+            default=False, help="Remove obsolete message strings.",
+        )
+        parser.add_argument(
+            '--keep-pot', action='store_true', dest='keep_pot',
+            default=False, help="Keep .pot file after making messages. Useful when debugging.",
+        )
 
     def handle(self, *args, **options):
-        locale = options.get('locale')
-        exclude = options.get('exclude')
-        self.domain = options.get('domain')
-        self.verbosity = options.get('verbosity')
-        process_all = options.get('all')
-        extensions = options.get('extensions')
-        self.symlinks = options.get('symlinks')
+        locale = options['locale']
+        exclude = options['exclude']
+        self.domain = options['domain']
+        self.verbosity = options['verbosity']
+        process_all = options['all']
+        extensions = options['extensions']
+        self.symlinks = options['symlinks']
 
         # Need to ensure that the i18n framework is enabled
         if settings.configured:
@@ -247,25 +283,25 @@ class Command(BaseCommand):
         else:
             settings.configure(USE_I18N=True)
 
-        ignore_patterns = options.get('ignore_patterns')
-        if options.get('use_default_ignore_patterns'):
+        ignore_patterns = options['ignore_patterns']
+        if options['use_default_ignore_patterns']:
             ignore_patterns += ['CVS', '.*', '*~', '*.pyc']
         self.ignore_patterns = list(set(ignore_patterns))
 
         # Avoid messing with mutable class variables
-        if options.get('no_wrap'):
+        if options['no_wrap']:
             self.msgmerge_options = self.msgmerge_options[:] + ['--no-wrap']
             self.msguniq_options = self.msguniq_options[:] + ['--no-wrap']
             self.msgattrib_options = self.msgattrib_options[:] + ['--no-wrap']
             self.xgettext_options = self.xgettext_options[:] + ['--no-wrap']
-        if options.get('no_location'):
+        if options['no_location']:
             self.msgmerge_options = self.msgmerge_options[:] + ['--no-location']
             self.msguniq_options = self.msguniq_options[:] + ['--no-location']
             self.msgattrib_options = self.msgattrib_options[:] + ['--no-location']
             self.xgettext_options = self.xgettext_options[:] + ['--no-location']
 
-        self.no_obsolete = options.get('no_obsolete')
-        self.keep_pot = options.get('keep_pot')
+        self.no_obsolete = options['no_obsolete']
+        self.keep_pot = options['keep_pot']
 
         if self.domain not in ('django', 'djangojs'):
             raise CommandError("currently makemessages only supports domains "
@@ -277,12 +313,16 @@ class Command(BaseCommand):
         self.extensions = handle_extensions(exts)
 
         if (locale is None and not exclude and not process_all) or self.domain is None:
-            raise CommandError("Type '%s help %s' for usage information." % (
-                os.path.basename(sys.argv[0]), sys.argv[1]))
+            raise CommandError(
+                "Type '%s help %s' for usage information."
+                % (os.path.basename(sys.argv[0]), sys.argv[1])
+            )
 
         if self.verbosity > 1:
-            self.stdout.write('examining files with the extensions: %s\n'
-                             % get_text_list(list(self.extensions), 'and'))
+            self.stdout.write(
+                'examining files with the extensions: %s\n'
+                % get_text_list(list(self.extensions), 'and')
+            )
 
         self.invoked_for_django = False
         self.locale_paths = []
@@ -334,7 +374,7 @@ class Command(BaseCommand):
     def gettext_version(self):
         # Gettext tools will output system-encoded bytestrings instead of UTF-8,
         # when looking up the version. It's especially a problem on Windows.
-        out, err, status = gettext_popen_wrapper(
+        out, err, status = popen_wrapper(
             ['xgettext', '--version'],
             stdout_encoding=DEFAULT_LOCALE_ENCODING,
         )
@@ -357,13 +397,14 @@ class Command(BaseCommand):
             if not os.path.exists(potfile):
                 continue
             args = ['msguniq'] + self.msguniq_options + [potfile]
-            msgs, errors, status = gettext_popen_wrapper(args)
+            msgs, errors, status = popen_wrapper(args)
             if errors:
                 if status != STATUS_OK:
                     raise CommandError(
                         "errors happened while running msguniq\n%s" % errors)
                 elif self.verbosity > 0:
                     self.stdout.write(errors)
+            msgs = normalize_eols(msgs)
             with io.open(potfile, 'w', encoding='utf-8') as fp:
                 fp.write(msgs)
             potfiles.append(potfile)
@@ -386,8 +427,10 @@ class Command(BaseCommand):
             Check if the given path should be ignored or not.
             """
             filename = os.path.basename(path)
-            ignore = lambda pattern: (fnmatch.fnmatchcase(filename, pattern) or
-                fnmatch.fnmatchcase(path, pattern))
+
+            def ignore(pattern):
+                return fnmatch.fnmatchcase(filename, pattern) or fnmatch.fnmatchcase(path, pattern)
+
             return any(ignore(pattern) for pattern in ignore_patterns)
 
         ignore_patterns = [os.path.normcase(p) for p in self.ignore_patterns]
@@ -506,11 +549,11 @@ class Command(BaseCommand):
 
         input_files = [bf.work_path for bf in build_files]
         with NamedTemporaryFile(mode='w+') as input_files_list:
-            input_files_list.write('\n'.join(input_files))
+            input_files_list.write(force_str('\n'.join(input_files), encoding=DEFAULT_LOCALE_ENCODING))
             input_files_list.flush()
             args.extend(['--files-from', input_files_list.name])
             args.extend(self.xgettext_options)
-            msgs, errors, status = gettext_popen_wrapper(args)
+            msgs, errors, status = popen_wrapper(args)
 
         if errors:
             if status != STATUS_OK:
@@ -553,7 +596,7 @@ class Command(BaseCommand):
 
         if os.path.exists(pofile):
             args = ['msgmerge'] + self.msgmerge_options + [pofile, potfile]
-            msgs, errors, status = gettext_popen_wrapper(args)
+            msgs, errors, status = popen_wrapper(args)
             if errors:
                 if status != STATUS_OK:
                     raise CommandError(
@@ -565,6 +608,7 @@ class Command(BaseCommand):
                 msgs = fp.read()
             if not self.invoked_for_django:
                 msgs = self.copy_plural_forms(msgs, locale)
+        msgs = normalize_eols(msgs)
         msgs = msgs.replace(
             "#. #-#-#-#-#  %s.pot (PACKAGE VERSION)  #-#-#-#-#\n" % self.domain, "")
         with io.open(pofile, 'w', encoding='utf-8') as fp:
@@ -572,7 +616,7 @@ class Command(BaseCommand):
 
         if self.no_obsolete:
             args = ['msgattrib'] + self.msgattrib_options + ['-o', pofile, pofile]
-            msgs, errors, status = gettext_popen_wrapper(args)
+            msgs, errors, status = popen_wrapper(args)
             if errors:
                 if status != STATUS_OK:
                     raise CommandError(
@@ -602,9 +646,9 @@ class Command(BaseCommand):
                         self.stdout.write("copying plural forms: %s\n" % plural_form_line)
                     lines = []
                     found = False
-                    for line in msgs.split('\n'):
+                    for line in msgs.splitlines():
                         if not found and (not line or plural_forms_re.search(line)):
-                            line = '%s\n' % plural_form_line
+                            line = plural_form_line
                             found = True
                         lines.append(line)
                     msgs = '\n'.join(lines)

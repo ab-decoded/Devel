@@ -3,25 +3,22 @@
 {% block content %}
 {% load socialaccount %}
 <div class="ui container two column middle aligned very relaxed stackable grid" id="store-signin">
-  <div class="column">
-    <a href="{% provider_login_url "facebook" %}"><button class="ui labeled facebook icon button social" id="facebook-login">
-      <i class="facebook icon"></i>
+  <div class="column" style="border-right:1px solid #ddd;">
+    <a href="{% provider_login_url "facebook" %}"><button class="ui ab labeled facebook icon basic button social" id="facebook-login">
+      <i class="facebook icon" style="background:#3B5998;color:#fff;"></i>
       Sign in with Facebook
     </button></a>
-    <button class="ui labeled google plus icon button social" id="google-login">
-      <i class="google plus icon"></i>
+    <button class="ui ab labeled google icon basic button social" id="google-login">
+      <i class="google plus icon" style="background:#DD4337;color:#fff;"></i>
       Sign in with Google
     </button>
-     <a href="{% provider_login_url "twitter" %}"><button class="ui labeled twitter icon button social" id="twitter-login">
-      <i class="twitter icon"></i>
+     <a href="{% provider_login_url "twitter" %}"><button class="ui ab labeled twitter icon basic button social" id="twitter-login">
+      <i class="twitter icon" style="background:#55ACEE;color:#fff;"></i>
       Sign in with Twitter
     </button></a>
   </div>
-  <div class="ui vertical divider">
-    Or
-  </div>
   <div class="column">
-  <form class="ui form" id="login_form" method="post" action="/sign-in">
+  <form class="ui ab form" id="login_form" method="post" action="/sign-in">
     {% csrf_token %}
     <div class="field">
       <label for="email">Username</label>
@@ -35,7 +32,7 @@
         <input type="password" name="password">
       </div>
     </div>
-    <button type="submit" class="ui teal animated button">
+    <button type="submit" class="ui ab teal animated button">
       <div class="visible content">Login</div>
       <div class="hidden content">
         <i class="right arrow icon"></i>

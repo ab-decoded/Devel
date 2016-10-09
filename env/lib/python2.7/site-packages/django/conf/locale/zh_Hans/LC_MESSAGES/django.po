@@ -5,10 +5,12 @@
 # Jannis Leidel <jannis@leidel.info>, 2011
 # Kevin Sze <leiarix@gmail.com>, 2012
 # Lele Long <schemacs@gmail.com>, 2011,2015
-# ouyanghongyu <ouyanghongyu@gmail.com>, 2014
+# mozillazg <opensource.mozillazg@gmail.com>, 2016
+# Ronald White <ouyanghongyu@gmail.com>, 2014
 # pylemon <leeway1985@gmail.com>, 2013
 # slene <vslene@gmail.com>, 2011
 # Sun Liwen <sunliwen@gmail.com>, 2014
+# Liping Wang <lynn.config@gmail.com>, 2016
 # Xiang Yu <bupt.aswmtjdsj@gmail.com>, 2014
 # Yin Jifeng <jifeng.yin@gmail.com>, 2013
 # Ziang Song <songziang@gmail.com>, 2011-2012
@@ -17,8 +19,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: django\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-09 17:42+0200\n"
-"PO-Revision-Date: 2015-11-27 09:35+0000\n"
+"POT-Creation-Date: 2016-06-29 20:57+0200\n"
+"PO-Revision-Date: 2016-06-30 08:31+0000\n"
 "Last-Translator: Jannis Leidel <jannis@leidel.info>\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/django/django/"
 "language/zh_CN/)\n"
@@ -70,6 +72,9 @@ msgstr "丹麦语"
 msgid "German"
 msgstr "德语"
 
+msgid "Lower Sorbian"
+msgstr ""
+
 msgid "Greek"
 msgstr "希腊语"
 
@@ -92,7 +97,7 @@ msgid "Argentinian Spanish"
 msgstr "阿根廷西班牙语"
 
 msgid "Colombian Spanish"
-msgstr ""
+msgstr "哥伦比亚西班牙语"
 
 msgid "Mexican Spanish"
 msgstr "墨西哥西班牙语"
@@ -125,7 +130,7 @@ msgid "Irish"
 msgstr "爱尔兰语"
 
 msgid "Scottish Gaelic"
-msgstr ""
+msgstr "苏格兰盖尔语"
 
 msgid "Galician"
 msgstr "加利西亚语"
@@ -138,6 +143,9 @@ msgstr "北印度语"
 
 msgid "Croatian"
 msgstr "克罗地亚语"
+
+msgid "Upper Sorbian"
+msgstr ""
 
 msgid "Hungarian"
 msgstr "匈牙利语"
@@ -199,8 +207,8 @@ msgstr "马拉地语"
 msgid "Burmese"
 msgstr "缅甸语"
 
-msgid "Norwegian Bokmal"
-msgstr "挪威博克马尔"
+msgid "Norwegian Bokmål"
+msgstr ""
 
 msgid "Nepali"
 msgstr "尼泊尔语"
@@ -298,9 +306,6 @@ msgstr "静态文件"
 msgid "Syndication"
 msgstr "联合"
 
-msgid "Web Design"
-msgstr "Web设计"
-
 msgid "Enter a valid value."
 msgstr "输入一个有效的值。"
 
@@ -308,10 +313,10 @@ msgid "Enter a valid URL."
 msgstr "输入一个有效的 URL。"
 
 msgid "Enter a valid integer."
-msgstr "请输入合法的整数。"
+msgstr "输入一个有效的整数。"
 
 msgid "Enter a valid email address."
-msgstr "输入一个合法的Email地址."
+msgstr "输入一个有效的 Email 地址。"
 
 msgid ""
 "Enter a valid 'slug' consisting of letters, numbers, underscores or hyphens."
@@ -320,16 +325,16 @@ msgstr "输入一个有效的 'slug'，由字母、数字、下划线或横线�
 msgid ""
 "Enter a valid 'slug' consisting of Unicode letters, numbers, underscores, or "
 "hyphens."
-msgstr ""
+msgstr "输入一个有效的 'slug'，由 Unicode 字母、数字、下划线或横线组成。"
 
 msgid "Enter a valid IPv4 address."
 msgstr "输入一个有效的 IPv4 地址。"
 
 msgid "Enter a valid IPv6 address."
-msgstr "填写合法的IPv6地址。"
+msgstr "输入一个有效的 IPv6 地址。"
 
 msgid "Enter a valid IPv4 or IPv6 address."
-msgstr "输入可用的IPv4 或 IPv6 地址."
+msgstr "输入一个有效的 IPv4 或 IPv6 地址."
 
 msgid "Enter only digits separated by commas."
 msgstr "只能输入用逗号分隔的数字。"
@@ -424,6 +429,9 @@ msgstr "整数"
 msgid "'%(value)s' value must be an integer."
 msgstr "’%(value)s‘ 必须为整数。"
 
+msgid "Big (8 byte) integer"
+msgstr "大整数(8字节)"
+
 #, python-format
 msgid "'%(value)s' value must be either True or False."
 msgstr "’%(value)s‘ 必须为 True 或者 False。"
@@ -501,9 +509,6 @@ msgstr "’%(value)s‘ 必须为浮点数字。"
 msgid "Floating point number"
 msgstr "浮点数"
 
-msgid "Big (8 byte) integer"
-msgstr "大整数(8字节)"
-
 msgid "IPv4 address"
 msgstr "IPv4 地址"
 
@@ -573,6 +578,14 @@ msgstr "外键(由相关字段确定)"
 
 msgid "One-to-one relationship"
 msgstr "一对一关系"
+
+#, python-format
+msgid "%(from)s-%(to)s relationship"
+msgstr ""
+
+#, python-format
+msgid "%(from)s-%(to)s relationships"
+msgstr ""
 
 msgid "Many-to-many relationship"
 msgstr "多对多关系"

@@ -123,6 +123,9 @@ def deleteTemplate(request,slug):
 def notFound(request):
 	return render(request,'yolo/partials/404.html'); 
 
+def handler404(request):
+    return render(request,'yolo/partials/404.html',status=404)
+
 
 # def userTemplates(request):
 ''' For GET request- Currently not used!!! '''
@@ -153,7 +156,6 @@ def editor(request,slug):
 def showcase(request,username,slug):
 	user=User.objects.get(username=username)
 	template=get_object_or_404(Template,userId_id=user.id,slug=slug)
-	print template
 	return render(request,'yolo/showcase.html',{'template':template})
 
 def signup(request):
@@ -211,9 +213,8 @@ def user_logout(request):
 
 
 
-# def handler404(request):
-#     response = render(request,'yolo/partials/404.html')
-#     response.status_code = 404
-#     return response
+
+
+
 
 

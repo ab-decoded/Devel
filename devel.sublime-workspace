@@ -1,0 +1,648 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"redis",
+				"redis_db_map"
+			],
+			[
+				"mode",
+				"modeInfo"
+			],
+			[
+				"code",
+				"code_change"
+			],
+			[
+				"broad",
+				"broadcast_change"
+			],
+			[
+				"true",
+				"trueChanges"
+			],
+			[
+				"subscribers",
+				"subscribers_redis"
+			],
+			[
+				"text",
+				"text_length"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": ".gitignore",
+			"settings":
+			{
+				"buffer_size": 28,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "requirements.txt",
+			"settings":
+			{
+				"buffer_size": 305,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "yolo/templates/yolo/accounts/signin.html",
+			"settings":
+			{
+				"buffer_size": 2746,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "yolo/static/css/ab-custom.css",
+			"settings":
+			{
+				"buffer_size": 3735,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "yolo/views.py",
+			"settings":
+			{
+				"buffer_size": 8759,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "yolo/templates/yolo/partials/404.html",
+			"settings":
+			{
+				"buffer_size": 1140,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "devel_main/settings.py",
+			"settings":
+			{
+				"buffer_size": 4318,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "yolo/templates/mockups/mockup2.html",
+			"settings":
+			{
+				"buffer_size": 7270,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "yolo/templates/yolo/editor/components.html",
+			"settings":
+			{
+				"buffer_size": 4402,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "yolo/templates/yolo/partials/layout.html",
+			"settings":
+			{
+				"buffer_size": 3093,
+				"line_ending": "Unix"
+			}
+		}
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 327.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"insta",
+				"Package Control: Install Package"
+			],
+			[
+				"inst",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 467.0
+	},
+	"console":
+	{
+		"height": 132.0,
+		"history":
+		[
+			"import urllib.request,os,hashlib; h = '2915d1851351e5ee549c20394736b442' + '8bc59f460fa1548d1514676163dafc88'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/home/abhinav/Desktop/Programming/Devel",
+		"/home/abhinav/Desktop/Programming/Devel/devel_main",
+		"/home/abhinav/Desktop/Programming/Devel/yolo",
+		"/home/abhinav/Desktop/Programming/Devel/yolo/templates",
+		"/home/abhinav/Desktop/Programming/Devel/yolo/templates/mockups",
+		"/home/abhinav/Desktop/Programming/Devel/yolo/templates/yolo",
+		"/home/abhinav/Desktop/Programming/Devel/yolo/templates/yolo/partials"
+	],
+	"file_history":
+	[
+		"/home/abhinav/Desktop/Programming/Devel/yolo/urls.py",
+		"/home/abhinav/.cache/google-chrome/Default/Media Cache/index",
+		"/home/abhinav/.cache/google-chrome/Default/Media Cache/index-dir/the-real-index",
+		"/tmp/rsub-wau794/nginx.conf",
+		"/tmp/rsub-4bfgcm/authorized_keys",
+		"/home/abhinav/.ssh/id_rsa.pub",
+		"/home/abhinav/.ssh/id_rsa",
+		"/tmp/rsub-xvzs72/gunicorn.sh",
+		"/home/abhinav/.ssh/config",
+		"/home/abhinav/Desktop/Programming/Devel/db.sqlite3",
+		"/home/abhinav/Desktop/Programming/Code-Code/config/sharedb.js",
+		"/home/abhinav/Desktop/Programming/Code-Code/config/config.js",
+		"/home/abhinav/Desktop/Programming/Code-Code/index.js",
+		"/home/abhinav/prograamming/B-small-ed.out",
+		"/home/abhinav/prograamming/B-small-attempt0.in",
+		"/home/abhinav/prograamming/B-large.out",
+		"/home/abhinav/prograamming/B-small.out",
+		"/home/abhinav/prograamming/B-small.in",
+		"/home/abhinav/B-small.in",
+		"/home/abhinav/prograamming/A-large.in",
+		"/home/abhinav/prograamming/A-large.out",
+		"/home/abhinav/prograamming/APAC-2-A.in",
+		"/home/abhinav/prograamming/A-small.out",
+		"/home/abhinav/prograamming/APAC-2-A.out",
+		"/home/abhinav/Desktop/Programming/Code-Code/.gitignore",
+		"/home/abhinav/Desktop/Programming/Code-Code/app/views/code/code.html",
+		"/home/abhinav/Desktop/Programming/Code-Code/app/views/layout.html",
+		"/home/abhinav/.npmrc",
+		"/home/abhinav/.config/touchegg/touchegg.conf",
+		"/etc/apt/sources.list.d/mongodb-org-3.0.list",
+		"/etc/default/grub"
+	],
+	"find":
+	{
+		"height": 35.0
+	},
+	"find_in_files":
+	{
+		"height": 93.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			" ",
+			"../",
+			"code",
+			"twilight",
+			"night",
+			"neo",
+			"material",
+			"liquibyte",
+			"isotope",
+			"icecoder",
+			"hopscotch",
+			"eclipse",
+			"colorforth",
+			"cobalt",
+			"blackboard",
+			"dark",
+			"<option>",
+			"info",
+			"var",
+			"int"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 5,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": ".gitignore",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 28,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								28,
+								28
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 9,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "requirements.txt",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 305,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								304,
+								304
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 8,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "yolo/templates/yolo/accounts/signin.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2746,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1474,
+								1474
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 96.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "yolo/static/css/ab-custom.css",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3735,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2291,
+								2291
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/CSS/CSS.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 1568.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "yolo/views.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 8759,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								5382,
+								5382
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 1248.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "yolo/templates/yolo/partials/404.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1140,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								495,
+								495
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "devel_main/settings.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 4318,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2287,
+								2287
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 1104.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"file": "yolo/templates/mockups/mockup2.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 7270,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								7270,
+								7270
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.sublime-syntax",
+							"tab_size": 3,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 1232.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 7,
+					"type": "text"
+				},
+				{
+					"buffer": 8,
+					"file": "yolo/templates/yolo/editor/components.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 4402,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								375,
+								375
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 6,
+					"type": "text"
+				},
+				{
+					"buffer": 9,
+					"file": "yolo/templates/yolo/partials/layout.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3093,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1245,
+								1245
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 24.0
+	},
+	"input":
+	{
+		"height": 32.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "",
+	"project": "devel.sublime-project",
+	"replace":
+	{
+		"height": 64.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"config",
+				"config/config.js"
+			],
+			[
+				"conf",
+				"config/config.js"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"",
+				"~/Desktop/Programming/Code-Code/code-code.sublime-project"
+			]
+		],
+		"width": 380.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 238.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+		"max_columns": 2
+	}
+}

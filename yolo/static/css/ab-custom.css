@@ -1,3 +1,58 @@
+/*
+	some fixes and design alterations.
+ */
+.ab.menu{
+	padding:0.5em 0.7em !important;
+}
+.ab.menu,.ab.segment{
+	/*border-bottom:1px solid #ccc !important;*/
+	box-shadow: none !important;
+	border-radius: 0 !important
+}
+.ab.menu>.item{
+	border-radius: 50px !important;
+}
+.ab.menu>.item.brand {
+	font-size: large;
+}
+.ab.menu>.item.right{
+	border-radius:0 !important;
+}
+.ab.menu >.item:before{
+	width:0 !important;
+	background:transparent !important;
+}
+.popper:hover{
+	background:#E8E8E8 !important;
+}
+.ab.menu >.item.active{
+	font-weight: bold;
+	border-radius: 50px !important;
+	background:transparent !important;
+}
+.ab.container{
+	width:100%;
+	margin-left:0 !important;
+	margin-right:0 !important;
+}
+.ab.menu .focus,.ab.menu .focus:hover{
+	color:#40003F !important;
+	font-weight: bold;
+}
+.ab.sidebar{
+	padding-top:80px !important;
+	width:75% !important;
+}
+.ab.large.button{
+	font-weight: 300 !important;
+}
+.ab.button{
+	border-radius:1px !important;
+}
+
+
+
+
 .ab.dropdown-title{
 	position:relative !important;
 }
@@ -64,19 +119,18 @@
 	text-decoration:underline !important;
 }
 
-
-
 .ui.modal{
 	top:40% !important;
 	box-shadow:none !important;
 	border-radius:0 !important;
 }
-}
 @media only screen and (min-width: 1200px){
 	.ui.small.modal{
 		width:450px;
 		margin:0em 0em 0em -225px
-		
+	}
+	.ui.ab.container{
+		width: 100% !important;
 	}
 }
 @media only screen and (min-width: 992px){
@@ -116,3 +170,21 @@
 		color:#F8F8F6;
 	}
 }	
+
+/************
+FIXES
+************/
+.ab[class*="center aligned"].grid .column, .ab.grid > [class*="center aligned"].row > .column, .ab.grid > [class*="center aligned"].column.column, .ab.grid > .row > [class*="center aligned"].column{
+	text-align: left !important; 
+}
+
+.ab.selection.dropdown{
+	border-radius:1.885em !important;
+}
+.ab.menu .item{
+	padding:0.52857143em 1.14285714em;
+}
+.ab.ui.form input:not([type]), .ab.ui.form input[type=text], .ab.ui.form input[type=email], .ab.ui.form input[type=search], .ab.ui.form input[type=password], .ab.ui.form input[type=date], .ab.ui.form input[type=datetime-local], .ab.ui.form input[type=tel], .ab.ui.form input[type=time], .ab.ui.form input[type=url], .ab.ui.form input[type=number]{
+	border-radius:1px !important;	
+}
+ 

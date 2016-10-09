@@ -28,7 +28,7 @@ class SDOOperator(SpatialOperator):
 
 
 class SDODistance(SpatialOperator):
-    sql_template = "SDO_GEOM.SDO_DISTANCE(%%(lhs)s, %%(rhs)s, %s) %%(op)s %%%%s" % DEFAULT_TOLERANCE
+    sql_template = "SDO_GEOM.SDO_DISTANCE(%%(lhs)s, %%(rhs)s, %s) %%(op)s %%(value)s" % DEFAULT_TOLERANCE
 
 
 class SDODWithin(SpatialOperator):
@@ -60,7 +60,6 @@ class OracleOperations(BaseSpatialOperations, DatabaseOperations):
     disallowed_aggregates = (aggregates.Collect, aggregates.Extent3D, aggregates.MakeLine)
 
     Adapter = OracleSpatialAdapter
-    Adaptor = Adapter  # Backwards-compatibility alias.
 
     area = 'SDO_GEOM.SDO_AREA'
     gml = 'SDO_UTIL.TO_GMLGEOMETRY'
@@ -78,6 +77,8 @@ class OracleOperations(BaseSpatialOperations, DatabaseOperations):
     transform = 'SDO_CS.TRANSFORM'
     union = 'SDO_GEOM.SDO_UNION'
     unionagg = 'SDO_AGGR_UNION'
+
+    from_text = 'SDO_GEOMETRY'
 
     function_names = {
         'Area': 'SDO_GEOM.SDO_AREA',
@@ -128,7 +129,7 @@ class OracleOperations(BaseSpatialOperations, DatabaseOperations):
     unsupported_functions = {
         'AsGeoJSON', 'AsGML', 'AsKML', 'AsSVG',
         'BoundingCircle', 'Envelope',
-        'ForceRHR', 'GeoHash', 'MemSize', 'Scale',
+        'ForceRHR', 'GeoHash', 'IsValid', 'MakeValid', 'MemSize', 'Scale',
         'SnapToGrid', 'Translate',
     }
 
@@ -195,7 +196,7 @@ class OracleOperations(BaseSpatialOperations, DatabaseOperations):
         """
         return 'MDSYS.SDO_GEOMETRY'
 
-    def get_distance(self, f, value, lookup_type):
+    def get_distance(self, f, value, lookup_type, **kwargs):
         """
         Returns the distance parameters given the value and the lookup type.
         On Oracle, geometry columns with a geodetic coordinate system behave

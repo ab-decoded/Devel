@@ -20,3 +20,5 @@ urlpatterns=[
 	# 404
 	url(r'^notFound$',views.notFound,name="notFound"),
 ]
+
+handler404='yolo.views.handler404'

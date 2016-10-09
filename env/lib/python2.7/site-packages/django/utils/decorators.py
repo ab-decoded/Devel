@@ -11,10 +11,10 @@ from django.utils import six
 
 
 class classonlymethod(classmethod):
-    def __get__(self, instance, owner):
+    def __get__(self, instance, cls=None):
         if instance is not None:
             raise AttributeError("This method is available only on the class, not on instances.")
-        return super(classonlymethod, self).__get__(instance, owner)
+        return super(classonlymethod, self).__get__(instance, cls)
 
 
 def method_decorator(decorator, name=''):
@@ -159,7 +159,8 @@ def make_middleware_decorator(middleware_class):
                     # Defer running of process_response until after the template
                     # has been rendered:
                     if hasattr(middleware, 'process_response'):
-                        callback = lambda response: middleware.process_response(request, response)
+                        def callback(response):
+                            return middleware.process_response(request, response)
                         response.add_post_render_callback(callback)
                 else:
                     if hasattr(middleware, 'process_response'):
@@ -189,8 +190,8 @@ class classproperty(object):
     def __init__(self, method=None):
         self.fget = method
 
-    def __get__(self, instance, owner):
-        return self.fget(owner)
+    def __get__(self, instance, cls=None):
+        return self.fget(cls)
 
     def getter(self, method):
         self.fget = method

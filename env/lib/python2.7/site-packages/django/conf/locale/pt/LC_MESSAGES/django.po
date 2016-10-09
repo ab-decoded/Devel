@@ -7,15 +7,15 @@
 # Jannis Leidel <jannis@leidel.info>, 2011
 # José Durães <jdmduraes@gmail.com>, 2014
 # jorgecarleitao <jorgecarleitao@gmail.com>, 2014-2015
-# Nuno Mariz <nmariz@gmail.com>, 2011-2013,2015
+# Nuno Mariz <nmariz@gmail.com>, 2011-2013,2015-2016
 # Paulo Köch <paulo.koch@gmail.com>, 2011
 # Raúl Pedro Fernandes Santos, 2014
 msgid ""
 msgstr ""
 "Project-Id-Version: django\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-09 17:42+0200\n"
-"PO-Revision-Date: 2015-11-27 09:35+0000\n"
+"POT-Creation-Date: 2016-06-29 20:57+0200\n"
+"PO-Revision-Date: 2016-06-30 08:31+0000\n"
 "Last-Translator: Jannis Leidel <jannis@leidel.info>\n"
 "Language-Team: Portuguese (http://www.transifex.com/django/django/language/"
 "pt/)\n"
@@ -67,6 +67,9 @@ msgstr "Dinamarquês"
 msgid "German"
 msgstr "Alemão"
 
+msgid "Lower Sorbian"
+msgstr ""
+
 msgid "Greek"
 msgstr "Grego"
 
@@ -89,7 +92,7 @@ msgid "Argentinian Spanish"
 msgstr "Espanhol Argentino"
 
 msgid "Colombian Spanish"
-msgstr ""
+msgstr "Espanhol Colombiano"
 
 msgid "Mexican Spanish"
 msgstr "Espanhol mexicano"
@@ -122,7 +125,7 @@ msgid "Irish"
 msgstr "Irlandês"
 
 msgid "Scottish Gaelic"
-msgstr ""
+msgstr "Escocês Gaélico"
 
 msgid "Galician"
 msgstr "Galaciano"
@@ -135,6 +138,9 @@ msgstr "Hindi"
 
 msgid "Croatian"
 msgstr "Croata"
+
+msgid "Upper Sorbian"
+msgstr ""
 
 msgid "Hungarian"
 msgstr "Húngaro"
@@ -196,8 +202,8 @@ msgstr "Marathi"
 msgid "Burmese"
 msgstr "Birmanês"
 
-msgid "Norwegian Bokmal"
-msgstr "Norueguês (Bokmål)"
+msgid "Norwegian Bokmål"
+msgstr ""
 
 msgid "Nepali"
 msgstr "Nepali"
@@ -294,9 +300,6 @@ msgstr "Ficheiros Estáticos"
 
 msgid "Syndication"
 msgstr "Syndication"
-
-msgid "Web Design"
-msgstr "Web Design"
 
 msgid "Enter a valid value."
 msgstr "Introduza um valor válido."
@@ -434,6 +437,9 @@ msgstr "Inteiro"
 msgid "'%(value)s' value must be an integer."
 msgstr "O valor '%(value)s' deve ser um número inteiro."
 
+msgid "Big (8 byte) integer"
+msgstr "Inteiro grande (8 byte)"
+
 #, python-format
 msgid "'%(value)s' value must be either True or False."
 msgstr "O valor '%(value)s' deve ser True ou False."
@@ -517,9 +523,6 @@ msgstr "O valor '%(value)s' deve ser um número de vírgula flutuante."
 msgid "Floating point number"
 msgstr "Número em vírgula flutuante"
 
-msgid "Big (8 byte) integer"
-msgstr "Inteiro grande (8 byte)"
-
 msgid "IPv4 address"
 msgstr "Endereço IPv4"
 
@@ -593,6 +596,14 @@ msgstr "Chave Estrangeira (tipo determinado pelo campo relacionado)"
 
 msgid "One-to-one relationship"
 msgstr "Relação de um-para-um"
+
+#, python-format
+msgid "%(from)s-%(to)s relationship"
+msgstr ""
+
+#, python-format
+msgid "%(from)s-%(to)s relationships"
+msgstr ""
 
 msgid "Many-to-many relationship"
 msgstr "Relação de muitos-para-muitos"

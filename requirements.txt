@@ -1,7 +1,4 @@
-Django==1.9.4
-django
-libmysqlclient-dev
-python-dev
+Django
 django-allauth==0.25.2
 django-browserid==2.0.1
 django-classy-tags==0.7.2
@@ -17,3 +14,4 @@ requests==2.9.1
 requests-oauthlib==0.6.1
 six==1.10.0
 tweepy==3.5.0
+pillow

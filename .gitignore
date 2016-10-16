@@ -4,3 +4,4 @@ deploy/
 devel_main/media/
 *.sublime-project
 *.sublime-workspace
+devel_main/config.py

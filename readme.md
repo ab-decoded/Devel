@@ -39,5 +39,3 @@ Migrate( applying migrations, actually making tables in database): ```python man
   ```
 ##### Any contribution and suggestion is appreciated. 
 *The project in no terms is complete and requires many new features. Any contribution in this regard is valuable. Feel free to use and modify as per requirements.*
-
-.

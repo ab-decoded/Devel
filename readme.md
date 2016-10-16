@@ -11,6 +11,15 @@ The project creates templates using Semantic-UI for grid system, and allows the 
 * MySQL for database
 * Semantic-UI, jQuery, Interact.js, jQuery-ui for frontend
 
+#### Features
+* Easily insert and edit.
+![alt tag](https://s3-us-west-2.amazonaws.com/devel-store/insert.gif)
+* Many easy-to-use features like color dropper.
+![alt tag](https://s3-us-west-2.amazonaws.com/devel-store/color.gif)
+
+*The project is live at [devel-ab.ml](http://devel-ab.ml)(no machine learning in there :P, just too lazy to get a new domain)* 
+
+
 #### Installation(Development)
 * ```git clone https://github.com/ab-decoded/Devel.git``` (Or using ssh)
 * ```cd Devel```
@@ -28,6 +37,7 @@ Migrate( applying migrations, actually making tables in database): ```python man
   VALUES ("facebook", "Facebook", "--put-your-own-app-secret-here--", "--put-your-own-app-id-here--", '');
   INSERT INTO socialaccount_socialapp_sites (socialapp_id, site_id) VALUES (1,1); 
   ```
-
+##### Any contribution and suggestion is appreciated. 
+*The project in no terms is complete and requires many new features. Any contribution in this regard is valuable. Feel free to use and modify as per requirements.*
 
 .

@@ -29,10 +29,10 @@ The project creates templates using Semantic-UI for grid system, and allows the 
 * Create a superuser for django(mainly for adding mockups) ```python manage.py createsuperuser```
 * Makemigration(creating new migrations based on the changes you have made to your models): ```python manage.py makemigrations```; 
 Migrate( applying migrations, actually making tables in database): ```python manage.py migrate```; To run: ```python manage.py runserver```
-* **Setup social login (optional)**: In MySQL, select ```devel``` database
+* **Setup social login (optional)**: In MySQL, select ```devel``` database and run the following code(For facebook and similarly for other social sites): 
 
   ```sql
-  UPDATE django_site SET DOMAIN = '127.0.0.1:8000', name = 'Vort' WHERE id=1;
+  UPDATE django_site SET DOMAIN = '127.0.0.1:8000', name = 'Devel' WHERE id=1;
   INSERT INTO socialaccount_socialapp (provider, name, secret, client_id, `key`)
   VALUES ("facebook", "Facebook", "--put-your-own-app-secret-here--", "--put-your-own-app-id-here--", '');
   INSERT INTO socialaccount_socialapp_sites (socialapp_id, site_id) VALUES (1,1); 
